@@ -1,6 +1,6 @@
-# covid-19-map
+# COVID-19 Map
 
-An interactive map of COVID-19 cases in the United States (will be hosted soon).
+An interactive map of COVID-19 cases in the United States (will be hosted soon!).
 
 ## To build the project locally:
 
