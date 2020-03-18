@@ -1,6 +1,6 @@
 # covid-19-map
 
-An interactive map of COVID-19 cases in the United States (will be hosted soon!).
+An interactive map of COVID-19 cases in the United States (will be hosted soon).
 
 ## To build the project locally:
 
@@ -23,29 +23,35 @@ source env/bin/activate
 pip install -r requirements.txt # potentially buggy
 ```
 
-If `pip` throws an error, then install Flask and Flask-CORS manually:
+If `pip` throws an error in the last step, then install Flask and Flask-CORS manually:
 
 ```bash
 pip install Flask Flask-Cors
 ```
 
-All done!
+You're all set!
 
 ## To run the project locally:
 
 ### Client
 
+From the project root directory,
+
 ```bash
-# from root
 cd client
 npm run serve
 ```
 
+Head over to http://localhost:8080/ to view the app.
+
 ### Server
 
+From the project root directory,
+
 ```bash
-# from root
 cd server
-source env/bin/activate # if not already in virtual environment
+source env/bin/activate # if not in virtual environment
 python3 app.py
 ```
+
+Head over to http://localhost:5000/ to view the server.
