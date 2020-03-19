@@ -1,34 +1,28 @@
 from urllib.request import urlopen
 from contextlib import closing
 from io import StringIO
-import csv, json
+import csv
+import json
 
+# GitHub raw CSV links from JHU CSSE
 CONFIRMED_CSV_INPUT = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
 DEATHS_CSV_INPUT = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv'
 RECOVERED_CSV_INPUT = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
 
+# output file locations in JSON format
 CONFIRMED_JSON_OUTPUT = './data/confirmed.json'
 DEATHS_JSON_OUTPUT = './data/deaths.json'
 RECOVERED_JSON_OUTPUT = './data/recovered.json'
 
-NUM_ROWS = None
-LAST_US_ROW = None
+NUM_ROWS = None  # number of rows in each CSV (identical)
 
-# evaluate NUM_ROWS and LAST_US_ROW
+# evaluate NUM_ROWS
 with closing(urlopen(CONFIRMED_CSV_INPUT)) as csvfile:
   data = csvfile.read().decode('ascii', 'ignore')
   datafile = StringIO(data)
-  dict_reader = csv.DictReader(datafile)
-  total_rows = 0
-  last_us_row = 0
+  csv_reader = csv.reader(datafile)
 
-  for row in dict_reader:
-    if row['Country/Region'] == 'US':
-      last_us_row = total_rows
-    total_rows += 1
-
-  NUM_ROWS = total_rows
-  LAST_US_ROW = last_us_row
+  NUM_ROWS = sum(1 for row in csv_reader) - 1  # subtract header row from total
 
 # generates confirmed.json
 #
@@ -48,12 +42,7 @@ with closing(urlopen(CONFIRMED_CSV_INPUT)) as csvfile:
 
       if row['Country/Region'] == 'US':
         json.dump(row, jsonfile)
-
-        # append commas where necessary
-        if line_count < LAST_US_ROW - 1:
-          jsonfile.write(',')
-
-        jsonfile.write('\n')
+        jsonfile.write(',\n')
 
       if line_count == NUM_ROWS - 1:
         jsonfile.write(']\n')
@@ -78,12 +67,7 @@ with closing(urlopen(DEATHS_CSV_INPUT)) as csvfile:
 
       if row['Country/Region'] == 'US':
         json.dump(row, jsonfile)
-
-        # append commas where necessary
-        if line_count < LAST_US_ROW - 1:
-          jsonfile.write(',')
-          
-        jsonfile.write('\n')
+        jsonfile.write(',\n')
 
       if line_count == NUM_ROWS - 1:
         jsonfile.write(']\n')
@@ -108,12 +92,7 @@ with closing(urlopen(RECOVERED_CSV_INPUT)) as csvfile:
 
       if row['Country/Region'] == 'US':
         json.dump(row, jsonfile)
-
-        # append commas where necessary
-        if line_count < LAST_US_ROW - 1:
-          jsonfile.write(',')
-          
-        jsonfile.write('\n')
+        jsonfile.write(',\n')
 
       if line_count == NUM_ROWS - 1:
         jsonfile.write(']\n')

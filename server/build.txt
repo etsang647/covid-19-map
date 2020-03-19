@@ -1,0 +1,5 @@
+(WIP)
+
+in bash script:
+  run output_data once a day (@ 00:00 UTC)
+  prettier --write all of the outputted json's
