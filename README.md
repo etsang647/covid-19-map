@@ -6,30 +6,31 @@ An interactive map of COVID-19 cases in the United States (will be hosted soon!)
 
 ### Dependencies
 
-- Python 3
-- Vue CLI 4
+- [Vue CLI 4](https://cli.vuejs.org/)
+- [Python 3](https://www.python.org/)
+  - [pip and venv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) if not already included with Python
 
-Open a terminal in the project's root directory and execute the following:
+Open a terminal window in the project's root directory and execute the following:
 
 ```bash
-# build client
+# install client dependencies
 cd client
 npm i
 
-# build server
+# install server dependencies
 cd ../server
 python3 venv env
 source env/bin/activate
-pip install -r requirements.txt # potentially buggy
+pip3 install -r requirements.txt # potentially buggy
 ```
 
-If `pip` throws an error in the last step, then install Flask and Flask-CORS manually:
+If `pip3` throws an error in the last step, install Flask and Flask-CORS manually:
 
 ```bash
-pip install Flask Flask-Cors
+pip3 install Flask Flask-Cors
 ```
 
-You're all set!
+You're all set now!
 
 ## To run the project locally:
 
@@ -42,7 +43,7 @@ cd client
 npm run serve
 ```
 
-Head over to http://localhost:8080/ to view the app.
+then head over to http://localhost:8080/ to visit the app.
 
 ### Server
 
@@ -54,4 +55,4 @@ source env/bin/activate # if not in virtual environment
 python3 app.py
 ```
 
-Head over to http://localhost:5000/ to view the server.
+then head over to http://localhost:5000/ to visit the server.

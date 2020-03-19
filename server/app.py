@@ -19,5 +19,10 @@ def ping_pong():
     return jsonify('pong!')
 
 
+@app.route('/', methods=['GET'])
+def message():
+    return jsonify('hi khoa')
+
+
 if __name__ == '__main__':
     app.run()
