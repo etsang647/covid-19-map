@@ -12,7 +12,7 @@ An interactive map of COVID-19 cases in the United States (will be hosted soon!)
 - [Python 3](https://www.python.org/)
   - [pip and venv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) (if not already included with Python)
 
-Then open a terminal window in a directory of your choice and clone the repository using the project URL from your address bar:
+Open a terminal window in a directory of your choice and clone the repository using the project URL from your address bar:
 
 ```bash
 git clone https://github.com/etsang647/covid-19-map
@@ -44,13 +44,15 @@ pip3 install Flask Flask-Cors
 
 You're all set!
 
-### (optional) Recompile data
+### (optional) Refresh data
 
 From the `server` directory, run
 
 ```bash
 make output
 ```
+
+to pull the most recent COVID-19 data from [JHU CSSE](https://github.com/CSSEGISandData/COVID-19).
 
 ## To run the project locally
 
