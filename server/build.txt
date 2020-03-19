@@ -1,5 +1,5 @@
 (WIP)
 
-in bash script:
-  run output_data once a day (@ 00:00 UTC)
-  prettier --write all of the outputted json's
+in a bash script:
+  run output_data.py once a day (@ 00:00 UTC)
+  run prettier --write on each of the output files

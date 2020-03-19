@@ -1,5 +1,9 @@
-# Python virtual environment
+# Python
 env
+__pycache__
 
-# VSCode (settings.json for python.pythonPath)
+# VSCode settings
 .vscode
+
+# macOS
+.DS_Store
