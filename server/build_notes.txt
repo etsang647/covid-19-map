@@ -1,0 +1,3 @@
+- generate data using 'make output' from /server
+- auto push to git to trigger a new deployment each day
+  - possible edge cases?

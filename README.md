@@ -21,8 +21,9 @@ git clone https://github.com/etsang647/covid-19-map
 Enter the project directory and install the rest of the dependencies:
 
 ```bash
-# enter project directory
+# install project dependencies
 cd covid-19-map
+npm i
 
 # install client dependencies
 cd client
@@ -35,13 +36,21 @@ source env/bin/activate
 pip3 install -r requirements.txt # potentially buggy
 ```
 
-If `pip3` throws an error in the last step, install Flask and Flask-CORS manually:
+If `pip3` throws an error in the last step, install [Flask](https://pypi.org/project/Flask/) and [Flask-CORS](https://pypi.org/project/Flask-Cors/) manually:
 
 ```bash
 pip3 install Flask Flask-Cors
 ```
 
 You're all set!
+
+### (optional) Recompile data
+
+From the `server` directory, run
+
+```bash
+make output
+```
 
 ## To run the project locally
 

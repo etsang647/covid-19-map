@@ -1,9 +1,12 @@
-# Python
-env
-__pycache__
+# macOS
+.DS_Store
 
 # VSCode settings
 .vscode
 
-# macOS
-.DS_Store
+# Python
+env
+__pycache__
+
+# npm
+node_modules
