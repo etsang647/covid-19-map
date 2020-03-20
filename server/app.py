@@ -1,5 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
+from get_data import *
 
 
 # configuration
@@ -15,8 +16,13 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/', methods=['GET'])
 def message():
-    return jsonify('hi khoa')
+  res_obj = {}
+#   req_data = request.get_json()
+#   name = req_data.get('name')
+#   date = req_data.get('date')
+  res_obj['amount'] = get_confirmed('Massachusetts', '3/19/20')
+  return jsonify(res_obj)
 
 
 if __name__ == '__main__':
-    app.run()
+  app.run()
