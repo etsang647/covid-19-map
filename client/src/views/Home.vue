@@ -15,10 +15,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#map {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-</style>

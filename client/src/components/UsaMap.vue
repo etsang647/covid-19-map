@@ -42,19 +42,10 @@ export default {
     getLocationClass(location, index) {
       console.log(location, index);
       if (location.name === 'Wyoming') {
-        return 'svg-map__location color';
+        return 'color';
       }
       return '';
     },
   },
 };
 </script>
-
-<style>
-.color {
-  fill: gold;
-}
-.color:hover {
-  opacity: 0.75;
-}
-</style>
