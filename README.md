@@ -49,7 +49,7 @@ You're all set!
 From the `server` directory, run
 
 ```bash
-make output
+make data
 ```
 
 to pull the most recent COVID-19 data from [JHU CSSE](https://github.com/CSSEGISandData/COVID-19).

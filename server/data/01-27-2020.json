@@ -1,0 +1,34 @@
+[
+  {
+    "Province/State": "Washington",
+    "Country/Region": "US",
+    "Last Update": "1/27/20 23:59",
+    "Confirmed": "1",
+    "Deaths": "",
+    "Recovered": ""
+  },
+  {
+    "Province/State": "Illinois",
+    "Country/Region": "US",
+    "Last Update": "1/27/20 23:59",
+    "Confirmed": "1",
+    "Deaths": "",
+    "Recovered": ""
+  },
+  {
+    "Province/State": "California",
+    "Country/Region": "US",
+    "Last Update": "1/27/20 23:59",
+    "Confirmed": "2",
+    "Deaths": "",
+    "Recovered": ""
+  },
+  {
+    "Province/State": "Arizona",
+    "Country/Region": "US",
+    "Last Update": "1/27/20 23:59",
+    "Confirmed": "1",
+    "Deaths": "",
+    "Recovered": ""
+  }
+]

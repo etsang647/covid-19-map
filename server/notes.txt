@@ -21,3 +21,5 @@ HEATMAP:
   ]
 
 - how to deal with asynchronous server response while states change color on load?
+
+** note that repo originally began recording individual US cities other than Washington, and state data did not fully appear until 03-10-2020 **

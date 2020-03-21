@@ -1,0 +1,492 @@
+[
+  {
+    "Province/State": "Washington",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T22:13:11",
+    "Confirmed": "267",
+    "Deaths": "23",
+    "Recovered": "1",
+    "Latitude": "47.4009",
+    "Longitude": "-121.4905"
+  },
+  {
+    "Province/State": "New York",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T17:13:27",
+    "Confirmed": "173",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "42.1657",
+    "Longitude": "-74.9481"
+  },
+  {
+    "Province/State": "California",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T19:13:28",
+    "Confirmed": "144",
+    "Deaths": "2",
+    "Recovered": "2",
+    "Latitude": "36.1162",
+    "Longitude": "-119.6816"
+  },
+  {
+    "Province/State": "Massachusetts",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T22:13:11",
+    "Confirmed": "92",
+    "Deaths": "0",
+    "Recovered": "1",
+    "Latitude": "42.2302",
+    "Longitude": "-71.5301"
+  },
+  {
+    "Province/State": "Georgia",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:53:03",
+    "Confirmed": "17",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "33.0406",
+    "Longitude": "-83.6431"
+  },
+  {
+    "Province/State": "Colorado",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T18:33:03",
+    "Confirmed": "15",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "39.0598",
+    "Longitude": "-105.3111"
+  },
+  {
+    "Province/State": "Florida",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T13:13:14",
+    "Confirmed": "15",
+    "Deaths": "2",
+    "Recovered": "0",
+    "Latitude": "27.7663",
+    "Longitude": "-81.6868"
+  },
+  {
+    "Province/State": "New Jersey",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T18:13:16",
+    "Confirmed": "15",
+    "Deaths": "1",
+    "Recovered": "0",
+    "Latitude": "40.2989",
+    "Longitude": "-74.5210"
+  },
+  {
+    "Province/State": "Oregon",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T19:53:13",
+    "Confirmed": "15",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "44.5720",
+    "Longitude": "-122.0709"
+  },
+  {
+    "Province/State": "Texas",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T04:13:13",
+    "Confirmed": "13",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "31.0545",
+    "Longitude": "-97.5635"
+  },
+  {
+    "Province/State": "Illinois",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T18:33:03",
+    "Confirmed": "12",
+    "Deaths": "0",
+    "Recovered": "2",
+    "Latitude": "40.3495",
+    "Longitude": "-88.9861"
+  },
+  {
+    "Province/State": "Pennsylvania",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T18:13:16",
+    "Confirmed": "12",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "40.5908",
+    "Longitude": "-77.2098"
+  },
+  {
+    "Province/State": "Iowa",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "8",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "42.0115",
+    "Longitude": "-93.2105"
+  },
+  {
+    "Province/State": "Maryland",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T18:13:16",
+    "Confirmed": "8",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "39.0639",
+    "Longitude": "-76.8021"
+  },
+  {
+    "Province/State": "North Carolina",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "7",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "35.6301",
+    "Longitude": "-79.8064"
+  },
+  {
+    "Province/State": "South Carolina",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "7",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "33.8569",
+    "Longitude": "-80.9450"
+  },
+  {
+    "Province/State": "Tennessee",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T19:53:13",
+    "Confirmed": "7",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "35.7478",
+    "Longitude": "-86.6923"
+  },
+  {
+    "Province/State": "Virginia",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:53:03",
+    "Confirmed": "7",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "37.7693",
+    "Longitude": "-78.1700"
+  },
+  {
+    "Province/State": "Arizona",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:53:04",
+    "Confirmed": "6",
+    "Deaths": "0",
+    "Recovered": "1",
+    "Latitude": "33.7298",
+    "Longitude": "-111.4312"
+  },
+  {
+    "Province/State": "Indiana",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T17:13:25",
+    "Confirmed": "6",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "39.8494",
+    "Longitude": "-86.2583"
+  },
+  {
+    "Province/State": "Kentucky",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "6",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "37.6681",
+    "Longitude": "-84.6701"
+  },
+  {
+    "Province/State": "Nevada",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "4",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "38.3135",
+    "Longitude": "-117.0554"
+  },
+  {
+    "Province/State": "New Hampshire",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "4",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "43.4525",
+    "Longitude": "-71.5639"
+  },
+  {
+    "Province/State": "Minnesota",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T19:53:13",
+    "Confirmed": "3",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "45.6945",
+    "Longitude": "-93.9002"
+  },
+  {
+    "Province/State": "Nebraska",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "3",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "41.1254",
+    "Longitude": "-98.2681"
+  },
+  {
+    "Province/State": "Ohio",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "3",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "40.3888",
+    "Longitude": "-82.7649"
+  },
+  {
+    "Province/State": "Rhode Island",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "3",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "41.6809",
+    "Longitude": "-71.5118"
+  },
+  {
+    "Province/State": "Wisconsin",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T17:13:25",
+    "Confirmed": "3",
+    "Deaths": "0",
+    "Recovered": "1",
+    "Latitude": "44.2685",
+    "Longitude": "-89.6165"
+  },
+  {
+    "Province/State": "Connecticut",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "2",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "41.5978",
+    "Longitude": "-72.7554"
+  },
+  {
+    "Province/State": "Hawaii",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "2",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "21.0943",
+    "Longitude": "-157.4983"
+  },
+  {
+    "Province/State": "Oklahoma",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T17:13:25",
+    "Confirmed": "2",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "35.5653",
+    "Longitude": "-96.9289"
+  },
+  {
+    "Province/State": "Utah",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T16:53:13",
+    "Confirmed": "2",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "40.1500",
+    "Longitude": "-111.8624"
+  },
+  {
+    "Province/State": "Kansas",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "1",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "38.5266",
+    "Longitude": "-96.7265"
+  },
+  {
+    "Province/State": "Louisiana",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "1",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "31.1695",
+    "Longitude": "-91.8678"
+  },
+  {
+    "Province/State": "Missouri",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "1",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "38.4561",
+    "Longitude": "-92.2884"
+  },
+  {
+    "Province/State": "Vermont",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T03:13:17",
+    "Confirmed": "1",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "44.0459",
+    "Longitude": "-72.7107"
+  },
+  {
+    "Province/State": "Alaska",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "61.3707",
+    "Longitude": "-152.4044"
+  },
+  {
+    "Province/State": "Arkansas",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "34.9697",
+    "Longitude": "-92.3731"
+  },
+  {
+    "Province/State": "Delaware",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "39.3185",
+    "Longitude": "-75.5071"
+  },
+  {
+    "Province/State": "Idaho",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "44.2405",
+    "Longitude": "-114.4788"
+  },
+  {
+    "Province/State": "Maine",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "44.6939",
+    "Longitude": "-69.3819"
+  },
+  {
+    "Province/State": "Michigan",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "43.3266",
+    "Longitude": "-84.5361"
+  },
+  {
+    "Province/State": "Mississippi",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "32.7416",
+    "Longitude": "-89.6787"
+  },
+  {
+    "Province/State": "Montana",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "46.9219",
+    "Longitude": "-110.4544"
+  },
+  {
+    "Province/State": "New Mexico",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "34.8405",
+    "Longitude": "-106.2485"
+  },
+  {
+    "Province/State": "North Dakota",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "47.5289",
+    "Longitude": "-99.7840"
+  },
+  {
+    "Province/State": "South Dakota",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "44.2998",
+    "Longitude": "-99.4388"
+  },
+  {
+    "Province/State": "West Virginia",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "38.4912",
+    "Longitude": "-80.9545"
+  },
+  {
+    "Province/State": "Wyoming",
+    "Country/Region": "US",
+    "Last Update": "2020-03-10T02:33:04",
+    "Confirmed": "0",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "42.7560",
+    "Longitude": "-107.3025"
+  }
+]
