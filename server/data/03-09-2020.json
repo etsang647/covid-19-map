@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "Province/State": "Washington, D.C.",
+    "Country/Region": "US",
+    "Last Update": "2020-03-08T13:53:03",
+    "Confirmed": "2",
+    "Deaths": "0",
+    "Recovered": "0",
+    "Latitude": "38.9072",
+    "Longitude": "-77.0369"
+  }
+]

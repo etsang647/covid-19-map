@@ -51,6 +51,7 @@
     <path
       id="dc"
       name="Washington, DC"
+      :class="computeDC"
       d="M1092.78,261.54L1092.27,261.05L1091.35,260.78L1090.97,260.69L1092.02,258.91L1093.2,260.01L1094.47,261.2L1093.34,263.3z"
     />
     <path
@@ -341,7 +342,7 @@ export default {
       return this.getClass('Connecticut', this.type);
     },
     computeDC() {
-      return this.getClass('Washington, DC', this.type);
+      return this.getClass('Washington, D.C.', this.type);
     },
     computeDE() {
       return this.getClass('Delaware', this.type);

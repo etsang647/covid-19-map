@@ -10,7 +10,7 @@ def get_cases(date):
   with open(json_file) as file:
     data = json.load(file)
     state_cases = initialize_cases()
-    state_classes = {}
+    state_classes = initialize_classes()
 
     for obj in data:
       confirmed = obj['Confirmed']
@@ -29,14 +29,22 @@ def get_cases(date):
       state_classes[obj['Province/State']] = classes
 
     return {'cases': state_cases, 'classes': state_classes}
+    # print({'cases': state_cases, 'classes': state_classes})
 
 
 def initialize_cases():
-  states = {}
+  state_cases = {}
   for state in LIST_OF_STATES:
     cases = {'confirmed': 0, 'deaths': 0, 'recovered': 0}
-    states[state] = cases
-  return states
+    state_cases[state] = cases
+  return state_cases
+
+def initialize_classes():
+  state_classes = {}
+  for state in LIST_OF_STATES:
+    cases = {'confirmed': 'class-0', 'deaths': 'class-0', 'recovered': 'class-0'}
+    state_classes[state] = cases
+  return state_classes
 
 
 def determine_class(number):
