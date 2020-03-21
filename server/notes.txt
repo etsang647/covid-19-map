@@ -7,3 +7,22 @@ HEATMAP:
 - determine class based on # of cases
 - v-bind class to state
 - set css for each class to form heatmap
+
+- make a json object including all states for all dates, and list their confirmed, deaths, and recovered
+  - e.g.
+
+  [
+    "3/19/20": {
+      "Washington": {
+        "Confirmed": 20,
+        "Deaths": 10,
+        "Recovered": 2
+      }
+      "New York": {
+        "Confirmed: 90,
+        "Deaths": 30,
+        "Recovered": 5
+      }
+    },
+    "3/20/20": {...}
+  ]

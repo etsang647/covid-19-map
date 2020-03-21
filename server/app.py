@@ -14,13 +14,14 @@ app.config.from_object(__name__)
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def message():
   res_obj = {}
-#   req_data = request.get_json()
-#   name = req_data.get('name')
-#   date = req_data.get('date')
-  res_obj['amount'] = get_confirmed('Massachusetts', '3/19/20')
+  if request.method == 'POST':
+    req_data = request.get_json()
+    name = req_data.get('name')
+    date = req_data.get('date')
+  res_obj['amount'] = get_confirmed(name, date)
   return jsonify(res_obj)
 
 
