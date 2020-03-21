@@ -1,5 +1,5 @@
 <template>
-  <States :classes="classes" />
+  <States :classes="classes" :type="type" :response="response" />
 </template>
 
 <script>
@@ -15,6 +15,8 @@ export default {
     return {
       cases: {},
       classes: {},
+      type: 'confirmed',
+      response: false,
     };
   },
   created() {
@@ -28,6 +30,7 @@ export default {
         .then((res) => {
           this.cases = res.data.cases;
           this.classes = res.data.classes;
+          this.response = true;
         })
         .catch((error) => {
           // eslint-disable-next-line

@@ -51,10 +51,12 @@ def determine_class(number):
     class_str = 'class-3'
   elif number >= 101 and number <= 500:
     class_str = 'class-4'
-  elif number >= 1001 and number <= 5000:
+  elif number >= 501 and number <= 1000:
     class_str = 'class-5'
-  else:
+  elif number >= 1001 and number <= 5000:
     class_str = 'class-6'
+  else:
+    class_str = 'class-7'
   return class_str
 
 
