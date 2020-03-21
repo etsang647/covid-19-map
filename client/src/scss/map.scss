@@ -1,12 +1,34 @@
 #map {
   max-width: 1000px;
   margin: 0 auto;
+  stroke: brown;
+  stroke-width: 1;
 
-  .color-1 {
-    fill: gold;
+  .class-0 {
+    fill: white;
   }
 
-  .color-2 {
-    fill: silver;
+  .class-1 {
+    fill: wheat;
+  }
+
+  .class-2 {
+    fill: yellow;
+  }
+
+  .class-3 {
+    fill: orange;
+  }
+
+  .class-4 {
+    fill: red;
+  }
+
+  .class-5 {
+    fill: brown;
+  }
+
+  .class-6 {
+    fill: black;
   }
 }

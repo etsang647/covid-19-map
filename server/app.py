@@ -19,9 +19,8 @@ def message():
   res_obj = {}
   if request.method == 'POST':
     req_data = request.get_json()
-    name = req_data.get('name')
     date = req_data.get('date')
-  res_obj['amount'] = get_confirmed(name, date)
+  res_obj = get_cases(date)
   return jsonify(res_obj)
 
 
