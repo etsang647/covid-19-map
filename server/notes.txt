@@ -11,18 +11,13 @@ HEATMAP:
 - make a json object including all states for all dates, and list their confirmed, deaths, and recovered
   - e.g.
 
+  'confirmed.json':
   [
     "3/19/20": {
-      "Washington": {
-        "Confirmed": 20,
-        "Deaths": 10,
-        "Recovered": 2
-      }
-      "New York": {
-        "Confirmed: 90,
-        "Deaths": 30,
-        "Recovered": 5
-      }
+      "Washington": 50,
+      "New York": 90
     },
     "3/20/20": {...}
   ]
+
+- how to deal with asynchronous server response while states change color on load?

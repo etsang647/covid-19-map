@@ -1,5 +1,5 @@
 <template>
-  <svg-map :map="USA" :location-class="getLocationClass" @click="exampleReq()" />
+  <svg-map :map="USA" :location-class="getLocationClass" />
 </template>
 
 <script>
@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       USA,
-      amount: '',
+      cases: {},
+      class: '',
     };
   },
   methods: {
@@ -24,28 +25,23 @@ export default {
       axios
         .post(path, payload)
         .then((res) => {
-          this.amount = res.data.amount;
-          console.log('amount is', this.amount);
+          this.cases[payload.name] = res.data.amount;
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
         });
     },
-    exampleReq() {
-      const payload = {
-        name: 'New York',
-        date: '3/19/20',
-      };
-      this.getAmount(payload);
-    },
-    getLocationClass(location, index) {
-      console.log(location, index);
-      if (location.name === 'Wyoming') {
-        return 'color';
+    getLocationClass(location) {
+      this.getAmount({ name: location.name, date: '3/19/20' });
+      if (parseFloat(this.cases[location.name]) > 100) {
+        return 'color-1';
       }
-      return '';
+      return 'color-2';
     },
+  },
+  created() {
+    this.getAmount({ name: 'New York', date: '3/19/20' });
   },
 };
 </script>
