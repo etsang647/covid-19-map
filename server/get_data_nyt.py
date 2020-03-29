@@ -21,7 +21,7 @@ def get_data():
       cases = row['cases']
       deaths = row['deaths']
 
-      state_object = {'cases': cases, 'deaths': deaths}
+      state_object = {'cases': int(cases), 'deaths': int(deaths)}
       
       dates_object[date][name] = state_object
 
