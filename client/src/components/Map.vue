@@ -1,5 +1,5 @@
 <template>
-  <States :classes="classes" :type="type" :response="response" />
+  <States :dates="dates" :response="response" />
 </template>
 
 <script>
@@ -13,14 +13,12 @@ export default {
   },
   data() {
     return {
-      cases: {},
-      classes: {},
-      type: 'confirmed',
+      dates: {},
       response: false,
     };
   },
   created() {
-    this.getCases({ date: '03-20-2020' });
+    this.getCases();
   },
   methods: {
     getCases(date) {
@@ -28,8 +26,7 @@ export default {
       axios
         .post(path, date)
         .then((res) => {
-          this.cases = res.data.cases;
-          this.classes = res.data.classes;
+          this.dates = res.data.dates;
           this.response = true;
         })
         .catch((error) => {

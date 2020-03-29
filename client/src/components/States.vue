@@ -318,7 +318,12 @@
 <script>
 export default {
   name: 'States',
-  props: ['classes', 'type', 'response'],
+  data() {
+    return {
+      type: 'cases',
+    };
+  },
+  props: ['dates', 'response'],
   computed: {
     computeAK() {
       return this.getClass('Alaska', this.type);
@@ -342,7 +347,7 @@ export default {
       return this.getClass('Connecticut', this.type);
     },
     computeDC() {
-      return this.getClass('Washington, D.C.', this.type);
+      return this.getClass('District of Columbia', this.type);
     },
     computeDE() {
       return this.getClass('Delaware', this.type);
@@ -476,11 +481,25 @@ export default {
   },
   methods: {
     getClass(name, type) {
+      const date = this.dates['2020-03-01'];
+      let number;
+
+      if (name in date) number = date[name][type];
+      else number = 0;
+
+      return this.determineClass(number);
+    },
+    determineClass(number) {
       let classStr;
 
-      if (type === 'confirmed') classStr = this.classes[name].confirmed;
-      else if (type === 'deaths') classStr = this.classes[name].deaths;
-      else if (type === 'recovered') classStr = this.classes[name].recovered;
+      if (number === 0) classStr = 'class-0';
+      else if (number >= 1 && number <= 5) classStr = 'class-1';
+      else if (number >= 6 && number <= 50) classStr = 'class-2';
+      else if (number >= 51 && number <= 100) classStr = 'class-3';
+      else if (number >= 101 && number <= 500) classStr = 'class-4';
+      else if (number >= 501 && number <= 1000) classStr = 'class-5';
+      else if (number >= 1001 && number <= 5000) classStr = 'class-6';
+      else classStr = 'class-7';
 
       return classStr;
     },
