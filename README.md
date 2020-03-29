@@ -44,11 +44,11 @@ pip3 install Flask Flask-Cors
 
 You're all set!
 
-### (Optional) Refresh data
+### (optional) Refresh data
 
 **Update as of 03/29/2020:** Data is now automatically pulled from [The New York Times](https://github.com/nytimes/covid-19-data) upon reload. I am no longer using the [JHU CSSE dataset](https://github.com/CSSEGISandData/COVID-19) due to their recent formatting inconsistencies. Any files utilizing that dataset can be found [here](https://github.com/etsang647/covid-19-map/tree/master/server/archive/jhu_csse).
 
-If you require data from [JHU CSSE](https://github.com/CSSEGISandData/COVID-19) for any reason, the following instructions will still work, albeit only for the date range `01-22-2020` to `03-21-2020` prior to their data overhaul. From the `server/archive/jhu_csse` directory, run `make data` to pull that data from their repository.
+If you require data from [JHU CSSE](https://github.com/CSSEGISandData/COVID-19) for any reason, the following instructions will still work, albeit only for the date range `01-22-2020` to `03-21-2020` prior to their data overhaul. From the `server/archive/jhu_csse` directory, run `./update_data.sh` to pull US state-level data from their repository.
 
 ## To run the project locally
 
