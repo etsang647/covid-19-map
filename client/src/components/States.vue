@@ -320,7 +320,7 @@ export default {
   name: 'States',
   data() {
     return {
-      type: 'cases',
+      type: 'deaths',
     };
   },
   props: ['dates', 'response'],
