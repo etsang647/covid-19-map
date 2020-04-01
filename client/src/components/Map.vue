@@ -23,7 +23,8 @@ export default {
   },
   methods: {
     getCases() {
-      const path = 'http://localhost:5000/data';
+      // const path = 'http://localhost:5000/data'; // local Flask server
+      const path = '/data';
       axios
         .post(path)
         .then((res) => {

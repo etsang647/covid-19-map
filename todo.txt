@@ -1,6 +1,0 @@
-- let user select date
-- let user select cases or deaths
-- add legend to map
-- add hover tooltip to states to see exact # of cases
-- add license?
-- deploy app
