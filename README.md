@@ -1,6 +1,6 @@
 # COVID-19 Map
 
-An interactive map of COVID-19 cases in the United States (will be deployed to Heroku soon!).
+An interactive map of COVID-19 cases in the United States. Visit it [here](https://covid-map-usa.herokuapp.com/)! (WIP)
 
 ## To build the project locally
 

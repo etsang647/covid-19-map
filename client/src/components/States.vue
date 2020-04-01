@@ -320,7 +320,7 @@ export default {
   name: 'States',
   data() {
     return {
-      type: 'deaths',
+      type: 'cases',
     };
   },
   props: ['dates', 'response'],
@@ -481,7 +481,7 @@ export default {
   },
   methods: {
     getClass(name, type) {
-      const date = this.dates['2020-03-07'];
+      const date = this.dates['2020-03-30'];
       let number;
 
       if (name in date) number = date[name][type];

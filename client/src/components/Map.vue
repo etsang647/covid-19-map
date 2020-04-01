@@ -21,10 +21,10 @@ export default {
     this.getCases();
   },
   methods: {
-    getCases(date) {
-      const path = 'http://localhost:5000/';
+    getCases() {
+      const path = '/data';
       axios
-        .post(path, date)
+        .post(path)
         .then((res) => {
           this.dates = res.data.dates;
           this.response = true;

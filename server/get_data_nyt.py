@@ -7,7 +7,7 @@ import json
 
 DATA_URL = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv'
 
-def get_data():
+def get_data_nyt():
   with closing(urlopen(DATA_URL)) as csv_file:
     data = csv_file.read().decode('ascii', 'ignore')
     data_file = StringIO(data)
@@ -28,4 +28,4 @@ def get_data():
   return {'dates': dates_object}
 
 if __name__ == "__main__":
-  get_data()
+  get_data_nyt()
