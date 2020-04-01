@@ -1,5 +1,7 @@
 <template>
   <!-- eslint-disable max-len -->
+
+  <!-- only show map after receiving data from server response -->
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="192 9 1028 746"
@@ -319,6 +321,8 @@
 export default {
   name: 'States',
   props: ['dates', 'response', 'date', 'type'],
+  // unique computed functions for each state
+  // since computed functions cannot accept arguments, such as state name
   computed: {
     computeAK() {
       return this.getClass('Alaska');
@@ -480,10 +484,12 @@ export default {
       let number;
 
       if (name in date) number = date[name][this.type];
-      else number = 0;
+      else number = 0; // if state not found in server response, set its number to 0
 
       return this.determineClass(number);
     },
+    // determines class i.e. color of state based on number of cases/deaths
+    // same cutoffs used by CDC but subject to change
     determineClass(number) {
       let classStr;
 

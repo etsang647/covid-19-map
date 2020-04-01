@@ -24,9 +24,9 @@ export default {
   methods: {
     getCases() {
       // const path = 'http://localhost:5000/data'; // local Flask server
-      const path = '/data';
+      const path = '/data'; // production server
       axios
-        .post(path)
+        .get(path)
         .then((res) => {
           this.dates = res.data.dates;
           this.response = true;

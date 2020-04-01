@@ -12,10 +12,14 @@ app.config.from_object(__name__)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-@app.route('/data', methods=['POST'])
+# MAIN ROUTE
+# 
+# sends the entirety of NYT state-level data in one go
+# front-loaded response that allows for fast data retrieval on client side afterward
+@app.route('/data', methods=['GET'])
 def message():
   res_obj = {}
-  if request.method == 'POST':
+  if request.method == 'GET':
     res_obj = get_data_nyt()
   return jsonify(res_obj)
 
