@@ -1,5 +1,5 @@
 <template>
-  <States :dates="dates" :response="response" />
+  <States :dates="dates" :response="response" :date="date" :type="type" />
 </template>
 
 <script>
@@ -17,12 +17,13 @@ export default {
       response: false,
     };
   },
+  props: ['date', 'type'],
   created() {
     this.getCases();
   },
   methods: {
     getCases() {
-      const path = '/data';
+      const path = 'http://localhost:5000/data';
       axios
         .post(path)
         .then((res) => {

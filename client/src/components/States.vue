@@ -318,173 +318,168 @@
 <script>
 export default {
   name: 'States',
-  data() {
-    return {
-      type: 'deaths',
-    };
-  },
-  props: ['dates', 'response'],
+  props: ['dates', 'response', 'date', 'type'],
   computed: {
     computeAK() {
-      return this.getClass('Alaska', this.type);
+      return this.getClass('Alaska');
     },
     computeAL() {
-      return this.getClass('Alabama', this.type);
+      return this.getClass('Alabama');
     },
     computeAR() {
-      return this.getClass('Arkansas', this.type);
+      return this.getClass('Arkansas');
     },
     computeAZ() {
-      return this.getClass('Arizona', this.type);
+      return this.getClass('Arizona');
     },
     computeCA() {
-      return this.getClass('California', this.type);
+      return this.getClass('California');
     },
     computeCO() {
-      return this.getClass('Colorado', this.type);
+      return this.getClass('Colorado');
     },
     computeCT() {
-      return this.getClass('Connecticut', this.type);
+      return this.getClass('Connecticut');
     },
     computeDC() {
-      return this.getClass('District of Columbia', this.type);
+      return this.getClass('District of Columbia');
     },
     computeDE() {
-      return this.getClass('Delaware', this.type);
+      return this.getClass('Delaware');
     },
     computeFL() {
-      return this.getClass('Florida', this.type);
+      return this.getClass('Florida');
     },
     computeGA() {
-      return this.getClass('Georgia', this.type);
+      return this.getClass('Georgia');
     },
     computeHI() {
-      return this.getClass('Hawaii', this.type);
+      return this.getClass('Hawaii');
     },
     computeIA() {
-      return this.getClass('Iowa', this.type);
+      return this.getClass('Iowa');
     },
     computeID() {
-      return this.getClass('Idaho', this.type);
+      return this.getClass('Idaho');
     },
     computeIL() {
-      return this.getClass('Illinois', this.type);
+      return this.getClass('Illinois');
     },
     computeIN() {
-      return this.getClass('Indiana', this.type);
+      return this.getClass('Indiana');
     },
     computeKS() {
-      return this.getClass('Kansas', this.type);
+      return this.getClass('Kansas');
     },
     computeKY() {
-      return this.getClass('Kentucky', this.type);
+      return this.getClass('Kentucky');
     },
     computeLA() {
-      return this.getClass('Louisiana', this.type);
+      return this.getClass('Louisiana');
     },
     computeMA() {
-      return this.getClass('Massachusetts', this.type);
+      return this.getClass('Massachusetts');
     },
     computeMD() {
-      return this.getClass('Maryland', this.type);
+      return this.getClass('Maryland');
     },
     computeME() {
-      return this.getClass('Maine', this.type);
+      return this.getClass('Maine');
     },
     computeMI() {
-      return this.getClass('Michigan', this.type);
+      return this.getClass('Michigan');
     },
     computeMN() {
-      return this.getClass('Minnesota', this.type);
+      return this.getClass('Minnesota');
     },
     computeMO() {
-      return this.getClass('Missouri', this.type);
+      return this.getClass('Missouri');
     },
     computeMS() {
-      return this.getClass('Mississippi', this.type);
+      return this.getClass('Mississippi');
     },
     computeMT() {
-      return this.getClass('Montana', this.type);
+      return this.getClass('Montana');
     },
     computeNC() {
-      return this.getClass('North Carolina', this.type);
+      return this.getClass('North Carolina');
     },
     computeND() {
-      return this.getClass('North Dakota', this.type);
+      return this.getClass('North Dakota');
     },
     computeNE() {
-      return this.getClass('Nebraska', this.type);
+      return this.getClass('Nebraska');
     },
     computeNH() {
-      return this.getClass('New Hampshire', this.type);
+      return this.getClass('New Hampshire');
     },
     computeNJ() {
-      return this.getClass('New Jersey', this.type);
+      return this.getClass('New Jersey');
     },
     computeNM() {
-      return this.getClass('New Mexico', this.type);
+      return this.getClass('New Mexico');
     },
     computeNV() {
-      return this.getClass('Nevada', this.type);
+      return this.getClass('Nevada');
     },
     computeNY() {
-      return this.getClass('New York', this.type);
+      return this.getClass('New York');
     },
     computeOH() {
-      return this.getClass('Ohio', this.type);
+      return this.getClass('Ohio');
     },
     computeOK() {
-      return this.getClass('Oklahoma', this.type);
+      return this.getClass('Oklahoma');
     },
     computeOR() {
-      return this.getClass('Oregon', this.type);
+      return this.getClass('Oregon');
     },
     computePA() {
-      return this.getClass('Pennsylvania', this.type);
+      return this.getClass('Pennsylvania');
     },
     computeRI() {
-      return this.getClass('Rhode Island', this.type);
+      return this.getClass('Rhode Island');
     },
     computeSC() {
-      return this.getClass('South Carolina', this.type);
+      return this.getClass('South Carolina');
     },
     computeSD() {
-      return this.getClass('South Dakota', this.type);
+      return this.getClass('South Dakota');
     },
     computeTN() {
-      return this.getClass('Tennessee', this.type);
+      return this.getClass('Tennessee');
     },
     computeTX() {
-      return this.getClass('Texas', this.type);
+      return this.getClass('Texas');
     },
     computeUT() {
-      return this.getClass('Utah', this.type);
+      return this.getClass('Utah');
     },
     computeVA() {
-      return this.getClass('Virginia', this.type);
+      return this.getClass('Virginia');
     },
     computeVT() {
-      return this.getClass('Vermont', this.type);
+      return this.getClass('Vermont');
     },
     computeWA() {
-      return this.getClass('Washington', this.type);
+      return this.getClass('Washington');
     },
     computeWI() {
-      return this.getClass('Wisconsin', this.type);
+      return this.getClass('Wisconsin');
     },
     computeWV() {
-      return this.getClass('West Virginia', this.type);
+      return this.getClass('West Virginia');
     },
     computeWY() {
-      return this.getClass('Wyoming', this.type);
+      return this.getClass('Wyoming');
     },
   },
   methods: {
-    getClass(name, type) {
-      const date = this.dates['2020-03-30'];
+    getClass(name) {
+      const date = this.dates[this.date];
       let number;
 
-      if (name in date) number = date[name][type];
+      if (name in date) number = date[name][this.type];
       else number = 0;
 
       return this.determineClass(number);
