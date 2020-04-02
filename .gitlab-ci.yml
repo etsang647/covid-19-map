@@ -19,19 +19,21 @@ docker-build:
     - docker pull $CACHE_IMAGE:build-vue || true
     - docker pull $CACHE_IMAGE:production || true
     - docker build
-        --target build-vue
-        --cache-from $CACHE_IMAGE:build-vue
-        --tag $CACHE_IMAGE:build-vue
-        --file ./Dockerfile
-        "."
+      --target build-vue
+      --cache-from $CACHE_IMAGE:build-vue
+      --tag $CACHE_IMAGE:build-vue
+      --file ./Dockerfile
+      "."
     - docker build
-        --cache-from $CACHE_IMAGE:production
-        --tag $CACHE_IMAGE:production
-        --tag $HEROKU_REGISTRY_IMAGE
-        --file ./Dockerfile
-        "."
+      --cache-from $CACHE_IMAGE:production
+      --tag $CACHE_IMAGE:production
+      --tag $HEROKU_REGISTRY_IMAGE
+      --file ./Dockerfile
+      "."
     - docker push $CACHE_IMAGE:build-vue
     - docker push $CACHE_IMAGE:production
     - docker login -u _ -p $HEROKU_AUTH_TOKEN registry.heroku.com
     - docker push $HEROKU_REGISTRY_IMAGE
     - ./release.sh
+  only:
+    - master
