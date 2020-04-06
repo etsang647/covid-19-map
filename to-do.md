@@ -10,3 +10,4 @@
 
 - Add a license
 - ~~Deploy app on Heroku~~
+- Replace build/run instructions in README with Docker commands
