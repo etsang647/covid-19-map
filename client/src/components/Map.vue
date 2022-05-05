@@ -1,5 +1,9 @@
 <template>
-  <States :dates="dates" :response="response" :date="date" :type="type" />
+  <div>
+    <p>{{ details }}</p>
+    <States :dates="dates" :response="response" :date="date" :type="type"
+    @hover-state="showDetails" @unhover-state="hideDetails"/>
+  </div>
 </template>
 
 <script>
@@ -15,6 +19,7 @@ export default {
     return {
       dates: {},
       response: false,
+      details: 'Hover over a state for more details',
     };
   },
   props: ['date', 'type'],
@@ -35,6 +40,12 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
+    },
+    showDetails(str) {
+      this.details = str;
+    },
+    hideDetails() {
+      this.details = 'Hover over a state for more details';
     },
   },
 };
