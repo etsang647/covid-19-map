@@ -1,6 +1,16 @@
 <template>
   <div class="home">
-    <h1 class="header">Showing {{ type }} as of {{ date }}</h1>
+    <h1 class="header">Cumulative {{ type }} as of {{ date }}</h1>
+    <form class="date-and-type">
+      <label for="date">Date:</label>
+      <input type="date" id="date-picker" v-model="date">
+
+      <label for="type">Type:</label>
+      <select v-model="type">
+        <option value="cases">cases</option>
+        <option value="deaths">deaths</option>
+      </select>
+    </form>
     <Map id="map" :date="date" :type="type" />
   </div>
 </template>
