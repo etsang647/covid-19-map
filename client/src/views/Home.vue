@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="header">Cumulative {{ type }} as of {{ date }}</h1>
+    <h1 class="header">Cumulative COVID-19 {{ type }} as of {{ date }}</h1>
     <form class="date-and-type">
       <label for="date">Date:</label>
       <input type="date" id="date-picker" v-model="date">
