@@ -10,7 +10,7 @@
   >
     <path
       id="ak"
-      :name="Alaska"
+      name="Alaska"
       :class="computeAK"
       @mouseover="showNumber('Alaska')"
       @mouseleave="unhover"
@@ -582,6 +582,11 @@ export default {
   },
   methods: {
     getClass(name) {
+      if (!this.isValidDate(this.date)) {
+        this.$emit('valid-date', false);
+        return this.determineClass(0);
+      }
+      this.$emit('valid-date', true);
       const date = this.dates[this.date];
       let number;
 
@@ -608,6 +613,11 @@ export default {
     },
     // hover over state to see case/death numbers
     showNumber(name) {
+      if (!this.isValidDate(this.date)) {
+        const str = `${name}: 0 ${this.type}`;
+        this.$emit('hover-state', str);
+        return;
+      }
       const date = this.dates[this.date];
       let number;
 
@@ -619,6 +629,18 @@ export default {
     },
     unhover() {
       this.$emit('unhover-state');
+    },
+    // checks if selected date is within bounds of dataset range
+    isValidDate(date) {
+      const startDate = new Date(2020, 0, 21); // start = 2020-01-21
+      startDate.setUTCHours(0);
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() - 1); // end = yesterday
+      endDate.setUTCHours(0, 0, 0, 0);
+
+      const selectedDate = Date.parse(date);
+
+      return selectedDate >= startDate && selectedDate <= endDate;
     },
   },
 };

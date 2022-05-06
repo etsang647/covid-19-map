@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="header">Cumulative COVID-19 {{ type }} as of {{ date }}</h1>
+    <h1 class="header">Cumulative COVID-19 {{ type }} as of {{ formatDate(date) }}</h1>
     <form class="date-and-type">
       <label for="date">Date:</label>
       <input type="date" id="date-picker" v-model="date">
@@ -29,6 +29,21 @@ export default {
       date: '2020-03-30',
       type: 'cases',
     };
+  },
+  methods: {
+    formatDate(date) {
+      const selectedDate = new Date(date);
+
+      selectedDate.setUTCHours(0, 0, 0, 0);
+
+      const formattedDate = selectedDate.toLocaleString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+        timeZone: 'UTC',
+      });
+      return formattedDate;
+    },
   },
 };
 </script>

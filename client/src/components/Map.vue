@@ -2,7 +2,8 @@
   <div>
     <p>{{ details }}</p>
     <States :dates="dates" :response="response" :date="date" :type="type"
-    @hover-state="showDetails" @unhover-state="hideDetails"/>
+    @hover-state="showDetails" @unhover-state="hideDetails"
+    @valid-date="validDate" />
   </div>
 </template>
 
@@ -20,6 +21,7 @@ export default {
       dates: {},
       response: false,
       details: 'Hover over a state for more details',
+      valid: false,
     };
   },
   props: ['date', 'type'],
@@ -45,7 +47,30 @@ export default {
       this.details = str;
     },
     hideDetails() {
-      this.details = 'Hover over a state for more details';
+      this.validDate(this.valid);
+    },
+    validDate(val) {
+      if (val) {
+        this.valid = true;
+        this.updateDetails('Hover over a state for more details');
+      } else {
+        const endDate = new Date();
+        endDate.setDate(endDate.getDate() - 1); // yesterday
+
+        const formattedDate = endDate.toLocaleString('en-US', {
+          month: '2-digit',
+          day: '2-digit',
+          year: 'numeric',
+        });
+
+        this.valid = false;
+
+        const invalidStr = `Invalid date (must be between 01/21/2020 and ${formattedDate})`;
+        this.updateDetails(invalidStr);
+      }
+    },
+    updateDetails(str) {
+      this.details = str;
     },
   },
 };
