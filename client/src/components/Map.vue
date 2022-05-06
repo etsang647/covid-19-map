@@ -20,7 +20,7 @@ export default {
     return {
       dates: {},
       response: false,
-      details: 'Hover over a state for more details',
+      details: 'Loading...',
       valid: false,
     };
   },
@@ -51,8 +51,8 @@ export default {
     },
     validDate(val) {
       if (val) {
-        this.valid = true;
         this.updateDetails('Hover over a state for more details');
+        this.valid = true;
       } else {
         const endDate = new Date();
         endDate.setDate(endDate.getDate() - 1); // yesterday
@@ -65,7 +65,7 @@ export default {
 
         this.valid = false;
 
-        const invalidStr = `Invalid date (must be between 01/21/2020 and ${formattedDate})`;
+        const invalidStr = `Error: Invalid date or date outside range (01/21/2020 - ${formattedDate})`;
         this.updateDetails(invalidStr);
       }
     },

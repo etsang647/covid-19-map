@@ -601,13 +601,14 @@ export default {
       let classStr;
 
       if (number === 0) classStr = 'class-0';
-      else if (number >= 1 && number <= 5) classStr = 'class-1';
-      else if (number >= 6 && number <= 50) classStr = 'class-2';
-      else if (number >= 51 && number <= 100) classStr = 'class-3';
-      else if (number >= 101 && number <= 500) classStr = 'class-4';
-      else if (number >= 501 && number <= 1000) classStr = 'class-5';
-      else if (number >= 1001 && number <= 5000) classStr = 'class-6';
-      else classStr = 'class-7';
+      else if (number >= 1 && number <= 9) classStr = 'class-1';
+      else if (number >= 10 && number <= 99) classStr = 'class-2';
+      else if (number >= 100 && number <= 999) classStr = 'class-3';
+      else if (number >= 1000 && number <= 9999) classStr = 'class-4';
+      else if (number >= 10000 && number <= 99999) classStr = 'class-5';
+      else if (number >= 100000 && number <= 999999) classStr = 'class-6';
+      else if (number >= 1000000 && number <= 9999999) classStr = 'class-7';
+      else classStr = 'class-8';
 
       return classStr;
     },

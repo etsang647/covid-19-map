@@ -17,38 +17,42 @@
 #map {
   max-width: 1000px;
   margin: 0 auto;
-  stroke: white;
+  stroke: #fff;
   stroke-width: 1;
 
   .class-0 {
-    fill: cornsilk;
+    fill: #FFD9D9;
   }
 
   .class-1 {
-    fill: wheat;
+    fill: #FFB9B9;
   }
 
   .class-2 {
-    fill: yellow;
+    fill: #FF9F9F;
   }
 
   .class-3 {
-    fill: gold;
+    fill: #FF8C8C;
   }
 
   .class-4 {
-    fill: orange;
+    fill: #FF7F7F;
   }
 
   .class-5 {
-    fill: red;
+    fill: #CC5959;
   }
 
   .class-6 {
-    fill: brown;
+    fill: #993939;
   }
 
   .class-7 {
-    fill: black;
+    fill: #662020;
+  }
+
+  .class-8 {
+    fill: #330D0D;
   }
 }

@@ -3,7 +3,8 @@
     <h1 class="header">Cumulative COVID-19 {{ type }} as of {{ formatDate(date) }}</h1>
     <form class="date-and-type">
       <label for="date">Date:</label>
-      <input type="date" id="date-picker" v-model="date">
+      <input type="date" id="date-picker" v-model="date"
+      min="2020-01-21" :max="endDate" >
 
       <label for="type">Type:</label>
       <select v-model="type">
@@ -26,8 +27,9 @@ export default {
   },
   data() {
     return {
-      date: '2020-03-30',
+      date: this.getEndDate(),
       type: 'cases',
+      endDate: this.getEndDate(),
     };
   },
   methods: {
@@ -43,6 +45,14 @@ export default {
         timeZone: 'UTC',
       });
       return formattedDate;
+    },
+    getEndDate() {
+      let date = new Date();
+      date.setDate(date.getDate() - 1); // yesterday's date
+      const offset = date.getTimezoneOffset();
+      date = new Date(date.getTime() - (offset * 60 * 1000));
+      console.log('is this working');
+      return date.toISOString().split('T')[0];
     },
   },
 };
