@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     getCases() {
-      const path = 'http://localhost:5000/data'; // local Flask server
-      // const path = '/data'; // production server
+      // const path = 'http://localhost:5000/data'; // local Flask server
+      const path = '/data'; // production server
       axios
         .get(path)
         .then((res) => {
