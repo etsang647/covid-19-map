@@ -29,14 +29,14 @@ export default {
     return {
       date: this.getEndDate(),
       type: 'cases',
-      endDate: this.getEndDate(),
+      endDate: this.getEndDate(), // for date input upper bound
     };
   },
   methods: {
+    // format date from yyyy-mm-dd to mm/dd/yyyy
     formatDate(date) {
       const selectedDate = new Date(date);
-
-      selectedDate.setUTCHours(0, 0, 0, 0);
+      selectedDate.setUTCHours(0, 0, 0, 0); // convert from local time to UTC midnight
 
       const formattedDate = selectedDate.toLocaleString('en-US', {
         month: '2-digit',
@@ -44,14 +44,18 @@ export default {
         year: 'numeric',
         timeZone: 'UTC',
       });
+
       return formattedDate;
     },
+    // gets end date of dataset (i.e. yesterday's date)
     getEndDate() {
       let date = new Date();
       date.setDate(date.getDate() - 1); // yesterday's date
+
+      // UTC conversion
       const offset = date.getTimezoneOffset();
       date = new Date(date.getTime() - (offset * 60 * 1000));
-      console.log('is this working');
+
       return date.toISOString().split('T')[0];
     },
   },

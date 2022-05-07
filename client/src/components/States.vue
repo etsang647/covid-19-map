@@ -581,11 +581,14 @@ export default {
     },
   },
   methods: {
+    // get html class (i.e. color) for state 'name'
     getClass(name) {
+      // if date is invalid, determine class for 0 cases/deaths
       if (!this.isValidDate(this.date)) {
         this.$emit('valid-date', false);
         return this.determineClass(0);
       }
+      // otherwise if date is valid, determine class for # of cases/deaths on that day
       this.$emit('valid-date', true);
       const date = this.dates[this.date];
       let number;
@@ -596,7 +599,6 @@ export default {
       return this.determineClass(number);
     },
     // determines class i.e. color of state based on number of cases/deaths
-    // same cutoffs used by CDC but subject to change
     determineClass(number) {
       let classStr;
 
@@ -612,8 +614,9 @@ export default {
 
       return classStr;
     },
-    // hover over state to see case/death numbers
+    // emit case/death numbers for state 'name'
     showNumber(name) {
+      // 0 if invalid date
       if (!this.isValidDate(this.date)) {
         const str = `${name}: 0 ${this.type}`;
         this.$emit('hover-state', str);
@@ -635,12 +638,12 @@ export default {
     isValidDate(date) {
       const startDate = new Date(2020, 0, 21); // start = 2020-01-21
       startDate.setUTCHours(0);
+
       const endDate = new Date();
       endDate.setDate(endDate.getDate() - 1); // end = yesterday
       endDate.setUTCHours(0, 0, 0, 0);
 
       const selectedDate = Date.parse(date);
-
       return selectedDate >= startDate && selectedDate <= endDate;
     },
   },

@@ -49,6 +49,7 @@ export default {
     hideDetails() {
       this.validDate(this.valid);
     },
+    // shows helpful message if val is true, otherwise shows error message
     validDate(val) {
       if (val) {
         this.updateDetails('Hover over a state for more details');
@@ -57,16 +58,16 @@ export default {
         const endDate = new Date();
         endDate.setDate(endDate.getDate() - 1); // yesterday
 
+        // format endDate into mm/dd/yyyy format
         const formattedDate = endDate.toLocaleString('en-US', {
           month: '2-digit',
           day: '2-digit',
           year: 'numeric',
         });
 
-        this.valid = false;
-
-        const invalidStr = `Error: Invalid date or date outside range (01/21/2020 - ${formattedDate})`;
+        const invalidStr = `Error: Invalid date, or date outside range (01/21/2020 - ${formattedDate})`;
         this.updateDetails(invalidStr);
+        this.valid = false;
       }
     },
     updateDetails(str) {
