@@ -643,8 +643,10 @@ export default {
       endDate.setDate(endDate.getDate() - 1); // end = yesterday
       endDate.setUTCHours(0, 0, 0, 0);
 
-      const selectedDate = Date.parse(date);
-      return selectedDate >= startDate && selectedDate < endDate;
+      const selectedDate = new Date(date);
+      selectedDate.setUTCHours(0, 0, 0, 0);
+
+      return selectedDate >= startDate && selectedDate <= endDate;
     },
   },
 };
