@@ -639,8 +639,8 @@ export default {
       const startDate = new Date(2020, 0, 21); // start = 2020-01-21
       startDate.setUTCHours(0);
 
-      const endDate = new Date();
-      endDate.setDate(endDate.getDate() - 1); // end = yesterday
+      const datesArray = Object.keys(this.dates);
+      const endDate = new Date(datesArray[datesArray.length - 1]);
       endDate.setUTCHours(0, 0, 0, 0);
 
       const selectedDate = new Date(date);

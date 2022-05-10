@@ -37,11 +37,19 @@ export default {
         .then((res) => {
           this.dates = res.data.dates;
           this.response = true;
+          this.getEndDate();
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.error(error);
         });
+    },
+    getEndDate() {
+      const datesArray = Object.keys(this.dates);
+      const endDate = datesArray[datesArray.length - 1];
+
+      this.$emit('end-date', endDate);
+      return endDate;
     },
     showDetails(str) {
       this.details = str;
@@ -55,8 +63,7 @@ export default {
         this.updateDetails('Hover over a state for more details');
         this.valid = true;
       } else {
-        const endDate = new Date();
-        endDate.setDate(endDate.getDate() - 1); // yesterday
+        const endDate = new Date(this.getEndDate());
 
         // format endDate into mm/dd/yyyy format
         const formattedDate = endDate.toLocaleString('en-US', {

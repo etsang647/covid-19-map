@@ -12,7 +12,7 @@
         <option value="deaths">deaths</option>
       </select>
     </form>
-    <Map id="map" :date="date" :type="type" />
+    <Map id="map" :date="date" :type="type" @end-date="getEndDate" />
   </div>
 </template>
 
@@ -27,9 +27,9 @@ export default {
   },
   data() {
     return {
-      date: this.getEndDate(),
+      date: '',
       type: 'cases',
-      endDate: this.getEndDate(), // for date input upper bound
+      endDate: '', // for date input upper bound
     };
   },
   methods: {
@@ -48,15 +48,9 @@ export default {
       return formattedDate;
     },
     // gets end date of dataset (i.e. yesterday's date)
-    getEndDate() {
-      let date = new Date();
-      date.setDate(date.getDate() - 1); // yesterday's date
-
-      // UTC conversion
-      const offset = date.getTimezoneOffset();
-      date = new Date(date.getTime() - (offset * 60 * 1000));
-
-      return date.toISOString().split('T')[0];
+    getEndDate(endDate) {
+      this.date = endDate;
+      this.endDate = endDate;
     },
   },
 };
