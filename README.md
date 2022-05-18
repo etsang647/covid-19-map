@@ -1,6 +1,6 @@
 # COVID-19 Map
 
-An interactive map of COVID-19 cases in the United States. Visit it [here](https://covid-map-usa.herokuapp.com/)! (WIP)
+An interactive map of COVID-19 cases in the United States. Visit it [here](https://covid-map-usa.herokuapp.com/)!
 
 ## To build the project locally
 
@@ -76,3 +76,7 @@ flask run
 ```
 
 to host the server at http://localhost:5000/.
+
+Note: When running the server locally, make sure the `path` listed in `Map.vue`
+is that of the local server (http://localhost:5000/data) and not the
+production server.
