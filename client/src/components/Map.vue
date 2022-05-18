@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ details }}</p>
-    <States :dates="dates" :response="response" :date="date" :type="type"
+    <States :dates="dates" :response="response" :start="start" :date="date" :type="type"
     @hover-state="showDetails" @unhover-state="hideDetails"
     @valid-date="validDate" />
   </div>
@@ -24,7 +24,7 @@ export default {
       valid: false,
     };
   },
-  props: ['date', 'type'],
+  props: ['start', 'date', 'type'],
   created() {
     this.getCases();
   },
