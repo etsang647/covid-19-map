@@ -17,7 +17,8 @@
         <option value="deaths">deaths</option>
       </select>
     </form>
-    <Map id="map" :start="start" :date="date" :type="type" @end-date="getEndDate" />
+    <Map id="map" :start="start" :date="date" :type="type" :dateCheck="checkDates"
+    @start-date="getStartDate" @end-date="getEndDate" />
   </div>
 </template>
 
@@ -36,7 +37,15 @@ export default {
       date: '',
       type: 'cases',
       endDate: '', // for date input upper bound
+      dateCheck: true,
     };
+  },
+  computed: {
+    checkDates() {
+      const startDate = new Date(this.start);
+      const endDate = new Date(this.date);
+      return (startDate <= endDate);
+    },
   },
   methods: {
     // format date from yyyy-mm-dd to mm/dd/yyyy
@@ -53,9 +62,12 @@ export default {
 
       return formattedDate;
     },
+    // gets start date of dataset (i.e. day before yesterday's date)
+    getStartDate(startDate) {
+      this.start = startDate;
+    },
     // gets end date of dataset (i.e. yesterday's date)
     getEndDate(endDate) {
-      this.start = '2020-01-21';
       this.date = endDate;
       this.endDate = endDate;
     },

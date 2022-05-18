@@ -24,14 +24,14 @@ export default {
       valid: false,
     };
   },
-  props: ['start', 'date', 'type'],
+  props: ['start', 'date', 'type', 'dateCheck'],
   created() {
     this.getCases();
   },
   methods: {
     getCases() {
-      const path = 'http://localhost:5000/data'; // local Flask server
-      // const path = '/data'; // production server
+      // const path = 'http://localhost:5000/data'; // local Flask server
+      const path = '/data'; // production server
       axios
         .get(path)
         .then((res) => {
@@ -47,7 +47,9 @@ export default {
     getEndDate() {
       const datesArray = Object.keys(this.dates);
       const endDate = datesArray[datesArray.length - 1];
+      const startDate = datesArray[datesArray.length - 2];
 
+      this.$emit('start-date', startDate);
       this.$emit('end-date', endDate);
       return endDate;
     },
@@ -60,7 +62,11 @@ export default {
     // shows helpful message if val is true, otherwise shows error message
     validDate(val) {
       if (val) {
-        this.updateDetails('Hover over a state for more details');
+        if (this.dateCheck) {
+          this.updateDetails('Hover over a state for more details');
+        } else {
+          this.updateDetails('Warning: Start date is later than end date');
+        }
         this.valid = true;
       } else {
         const endDate = new Date(this.getEndDate());

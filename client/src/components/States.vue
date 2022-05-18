@@ -603,8 +603,9 @@ export default {
       return this.determineClass(number - startNumber);
     },
     // determines class i.e. color of state based on number of cases/deaths
-    determineClass(number) {
+    determineClass(count) {
       let classStr;
+      const number = Math.abs(count);
 
       if (number === 0) classStr = 'class-0';
       else if (number >= 1 && number <= 9) classStr = 'class-1';
