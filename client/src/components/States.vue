@@ -422,7 +422,7 @@
 <script>
 export default {
   name: 'States',
-  props: ['dates', 'response', 'date', 'type'],
+  props: ['dates', 'response', 'start', 'date', 'type'],
   // unique computed functions for each state
   // since computed functions cannot accept arguments, such as state name
   computed: {
@@ -584,23 +584,28 @@ export default {
     // get html class (i.e. color) for state 'name'
     getClass(name) {
       // if date is invalid, determine class for 0 cases/deaths
-      if (!this.isValidDate(this.date)) {
+      if (!this.isValidDate(this.start) || !this.isValidDate(this.date)) {
         this.$emit('valid-date', false);
         return this.determineClass(0);
       }
       // otherwise if date is valid, determine class for # of cases/deaths on that day
       this.$emit('valid-date', true);
+      const startDate = this.dates[this.start];
       const date = this.dates[this.date];
+      let startNumber;
       let number;
 
+      if (name in startDate) startNumber = startDate[name][this.type];
+      else startNumber = 0;
       if (name in date) number = date[name][this.type];
       else number = 0; // if state not found in server response, set its number to 0
 
-      return this.determineClass(number);
+      return this.determineClass(number - startNumber);
     },
     // determines class i.e. color of state based on number of cases/deaths
-    determineClass(number) {
+    determineClass(count) {
       let classStr;
+      const number = Math.abs(count);
 
       if (number === 0) classStr = 'class-0';
       else if (number >= 1 && number <= 9) classStr = 'class-1';
@@ -617,18 +622,22 @@ export default {
     // emit case/death numbers for state 'name'
     showNumber(name) {
       // 0 if invalid date
-      if (!this.isValidDate(this.date)) {
+      if (!this.isValidDate(this.start) || !this.isValidDate(this.date)) {
         const str = `${name}: 0 ${this.type}`;
         this.$emit('hover-state', str);
         return;
       }
+      const startDate = this.dates[this.start];
       const date = this.dates[this.date];
+      let startNumber;
       let number;
 
+      if (name in startDate) startNumber = startDate[name][this.type];
+      else startNumber = 0;
       if (name in date) number = date[name][this.type];
       else number = 0; // if state not found in server response, set its number to 0
 
-      const str = `${name}: ${number} ${this.type}`;
+      const str = `${name}: ${number - startNumber} ${this.type}`;
       this.$emit('hover-state', str);
     },
     unhover() {

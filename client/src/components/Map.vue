@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ details }}</p>
-    <States :dates="dates" :response="response" :date="date" :type="type"
+    <States :dates="dates" :response="response" :start="start" :date="date" :type="type"
     @hover-state="showDetails" @unhover-state="hideDetails"
     @valid-date="validDate" />
   </div>
@@ -24,7 +24,7 @@ export default {
       valid: false,
     };
   },
-  props: ['date', 'type'],
+  props: ['start', 'date', 'type', 'dateCheck'],
   created() {
     this.getCases();
   },
@@ -47,7 +47,9 @@ export default {
     getEndDate() {
       const datesArray = Object.keys(this.dates);
       const endDate = datesArray[datesArray.length - 1];
+      const startDate = datesArray[datesArray.length - 2];
 
+      this.$emit('start-date', startDate);
       this.$emit('end-date', endDate);
       return endDate;
     },
@@ -60,7 +62,11 @@ export default {
     // shows helpful message if val is true, otherwise shows error message
     validDate(val) {
       if (val) {
-        this.updateDetails('Hover over a state for more details');
+        if (this.dateCheck) {
+          this.updateDetails('Hover over a state for more details');
+        } else {
+          this.updateDetails('Warning: Start date is later than end date');
+        }
         this.valid = true;
       } else {
         const endDate = new Date(this.getEndDate());

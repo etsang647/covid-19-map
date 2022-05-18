@@ -1,9 +1,14 @@
 <template>
   <div class="home">
-    <h1 class="header">Cumulative COVID-19 {{ type }} as of {{ formatDate(date) }}</h1>
+    <h1 class="header">COVID-19 {{ type }} from {{ formatDate(start) }} to
+      {{ formatDate(date) }}</h1>
     <form class="date-and-type">
-      <label for="date">Date:</label>
-      <input type="date" id="date-picker" v-model="date"
+      <label for="date">Start date:</label>
+      <input type="date" class="date-picker" v-model="start"
+      min="2020-01-21" :max="endDate" >
+
+      <label for="date">End date:</label>
+      <input type="date" class="date-picker" v-model="date"
       min="2020-01-21" :max="endDate" >
 
       <label for="type">Type:</label>
@@ -12,7 +17,8 @@
         <option value="deaths">deaths</option>
       </select>
     </form>
-    <Map id="map" :date="date" :type="type" @end-date="getEndDate" />
+    <Map id="map" :start="start" :date="date" :type="type" :dateCheck="checkDates"
+    @start-date="getStartDate" @end-date="getEndDate" />
   </div>
 </template>
 
@@ -27,10 +33,19 @@ export default {
   },
   data() {
     return {
+      start: '',
       date: '',
       type: 'cases',
       endDate: '', // for date input upper bound
+      dateCheck: true,
     };
+  },
+  computed: {
+    checkDates() {
+      const startDate = new Date(this.start);
+      const endDate = new Date(this.date);
+      return (startDate <= endDate);
+    },
   },
   methods: {
     // format date from yyyy-mm-dd to mm/dd/yyyy
@@ -46,6 +61,10 @@ export default {
       });
 
       return formattedDate;
+    },
+    // gets start date of dataset (i.e. day before yesterday's date)
+    getStartDate(startDate) {
+      this.start = startDate;
     },
     // gets end date of dataset (i.e. yesterday's date)
     getEndDate(endDate) {
