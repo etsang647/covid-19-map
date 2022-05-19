@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <h1 class="header">COVID-19 {{ type }} from {{ formatDate(start) }} to
+    <h1 class="header" v-if="loaded">COVID-19 {{ type }} from {{ formatDate(start) }} to
       {{ formatDate(date) }}</h1>
-    <form class="date-and-type">
+    <h1 class="header" v-else>Loading...</h1>
+    <form class="date-and-type" v-if="loaded">
       <label for="date">Start date:</label>
       <input type="date" class="date-picker" v-model="start"
       min="2020-01-21" :max="endDate" >
@@ -18,7 +19,7 @@
       </select>
     </form>
     <Map id="map" :start="start" :date="date" :type="type" :dateCheck="checkDates"
-    @start-date="getStartDate" @end-date="getEndDate" />
+    @start-date="getStartDate" @end-date="getEndDate" @loaded="doneLoading" />
   </div>
 </template>
 
@@ -38,6 +39,7 @@ export default {
       type: 'cases',
       endDate: '', // for date input upper bound
       dateCheck: true,
+      loaded: false,
     };
   },
   computed: {
@@ -70,6 +72,9 @@ export default {
     getEndDate(endDate) {
       this.date = endDate;
       this.endDate = endDate;
+    },
+    doneLoading() {
+      this.loaded = true;
     },
   },
 };

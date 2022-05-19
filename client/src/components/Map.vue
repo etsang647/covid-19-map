@@ -20,7 +20,7 @@ export default {
     return {
       dates: {},
       response: false,
-      details: 'Loading...',
+      details: '',
       valid: false,
     };
   },
@@ -51,6 +51,7 @@ export default {
 
       this.$emit('start-date', startDate);
       this.$emit('end-date', endDate);
+      this.$emit('loaded');
       return endDate;
     },
     showDetails(str) {
