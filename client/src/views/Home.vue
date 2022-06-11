@@ -4,6 +4,12 @@
       {{ formatDate(date) }}</h1>
     <h1 class="header" v-else>Loading...</h1>
     <form class="date-and-type" v-if="loaded">
+      <label for="type">Type:</label>
+      <select v-model="type">
+        <option value="cases">cases</option>
+        <option value="deaths">deaths</option>
+      </select>
+
       <label for="date">Start date:</label>
       <input type="date" class="date-picker" v-model="start"
       min="2020-01-21" :max="endDate" >
@@ -11,12 +17,6 @@
       <label for="date">End date:</label>
       <input type="date" class="date-picker" v-model="date"
       min="2020-01-21" :max="endDate" >
-
-      <label for="type">Type:</label>
-      <select v-model="type">
-        <option value="cases">cases</option>
-        <option value="deaths">deaths</option>
-      </select>
     </form>
     <Map id="map" :start="start" :date="date" :type="type" :dateCheck="checkDates"
     @start-date="getStartDate" @end-date="getEndDate" @loaded="doneLoading" />
