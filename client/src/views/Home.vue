@@ -1,80 +1,81 @@
 <template>
   <div class="home">
-    <h1 class="header" v-if="loaded">COVID-19 {{ type }} from {{ formatDate(start) }} to
-      {{ formatDate(date) }}</h1>
-    <h1 class="header" v-else>Loading...</h1>
-    <form class="date-and-type" v-if="loaded">
+    <h1 class="header">{{ headerText }}</h1>
+    <!-- wrap these forms up in a component later -->
+    <form action="" class="date-and-type">
       <label for="type">Type:</label>
-      <select v-model="type">
+      <select name="" id="" v-model="dataType">
         <option value="cases">cases</option>
         <option value="deaths">deaths</option>
       </select>
 
       <label for="date">Start date:</label>
-      <input type="date" class="date-picker" v-model="start"
-      min="2020-01-21" :max="endDate" >
+      <input type="date" class="date-picker" v-model="startDate" :min="minDate" :max="maxDate">
 
       <label for="date">End date:</label>
-      <input type="date" class="date-picker" v-model="date"
-      min="2020-01-21" :max="endDate" >
+      <input type="date" class="date-picker" v-model="endDate" :min="minDate" :max="maxDate">
     </form>
-    <Map id="map" :start="start" :date="date" :type="type" :dateCheck="checkDates"
-    @start-date="getStartDate" @end-date="getEndDate" @loaded="doneLoading" />
+    <Map id="map" v-if="isLoaded" :dataType="dataType"
+    :startData="getStartData()" :endData="getEndData()" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Map from '@/components/Map.vue';
+import Map from '../components/Map.vue';
 
 export default {
+  components: { Map },
   name: 'Home',
-  components: {
-    Map,
-  },
   data() {
     return {
-      start: '',
-      date: '',
-      type: 'cases',
-      endDate: '', // for date input upper bound
-      dateCheck: true,
-      loaded: false,
+      isLoaded: false,
+      dataset: {},
+      dataType: 'cases',
+      startDate: '',
+      endDate: '',
+      minDate: '',
+      maxDate: '',
     };
   },
+  mounted() {
+    this.setUpApp();
+  },
   computed: {
-    checkDates() {
-      const startDate = new Date(this.start);
-      const endDate = new Date(this.date);
-      return (startDate <= endDate);
+    headerText() {
+      const str = `COVID-19 ${this.dataType} from ${this.startDate} to ${this.endDate}`;
+      return str;
     },
   },
   methods: {
-    // format date from yyyy-mm-dd to mm/dd/yyyy
-    formatDate(date) {
-      const selectedDate = new Date(date);
-      selectedDate.setUTCHours(0, 0, 0, 0); // convert from local time to UTC midnight
-
-      const formattedDate = selectedDate.toLocaleString('en-US', {
-        month: '2-digit',
-        day: '2-digit',
-        year: 'numeric',
-        timeZone: 'UTC',
-      });
-
-      return formattedDate;
+    // fetch NYT dataset from server
+    async fetchData() {
+      const path = 'http://localhost:5000/data'; // local Flask server
+      // const path = '/data'; // production server
+      const response = await fetch(path);
+      return response.json();
+      // catch here???
     },
-    // gets start date of dataset (i.e. day before yesterday's date)
-    getStartDate(startDate) {
-      this.start = startDate;
+    // by default, set startDate and endDate to the 2 most recent dates in dataset
+    // also set date boundaries for date input
+    setDefaultDates() {
+      const datasetArr = Object.keys(this.dataset);
+      this.startDate = datasetArr[datasetArr.length - 2];
+      this.endDate = datasetArr[datasetArr.length - 1];
+      [this.minDate] = datasetArr;
+      this.maxDate = this.endDate;
     },
-    // gets end date of dataset (i.e. yesterday's date)
-    getEndDate(endDate) {
-      this.date = endDate;
-      this.endDate = endDate;
+    getStartData() {
+      return this.dataset[this.startDate];
     },
-    doneLoading() {
-      this.loaded = true;
+    getEndData() {
+      return this.dataset[this.endDate];
+    },
+    async setUpApp() {
+      const data = await this.fetchData();
+      this.dataset = data.dates;
+      // catch this too
+      this.setDefaultDates();
+      this.isLoaded = true;
     },
   },
 };
