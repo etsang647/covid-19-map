@@ -1,40 +1,29 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="isLoaded">
     <h1 class="header">{{ headerText }}</h1>
-    <!-- wrap these forms up in a component later -->
-    <form action="" class="date-and-type">
-      <label for="type">Type:</label>
-      <select name="" id="" v-model="dataType">
-        <option value="cases">cases</option>
-        <option value="deaths">deaths</option>
-      </select>
-
-      <label for="date">Start date:</label>
-      <input type="date" class="date-picker" v-model="startDate" :min="minDate" :max="maxDate">
-
-      <label for="date">End date:</label>
-      <input type="date" class="date-picker" v-model="endDate" :min="minDate" :max="maxDate">
-    </form>
-    <Map v-if="isLoaded" :dataType="dataType"
-    :startData="getStartData()" :endData="getEndData()" />
+    <Forms :dataType="dataType" :dates="dates" @input-changed="updateInputs" />
+    <Map :dataType="dataType" :startData="getStartData()" :endData="getEndData()" />
   </div>
 </template>
 
 <script>
 import Map from '../components/Map.vue';
+import Forms from '../components/Forms.vue';
 
 export default {
-  components: { Map },
+  components: { Map, Forms },
   name: 'Home',
   data() {
     return {
       isLoaded: false,
       dataset: {},
-      dataType: 'cases',
-      startDate: '',
-      endDate: '',
-      minDate: '',
-      maxDate: '',
+      dataType: '',
+      dates: {
+        start: '',
+        end: '',
+        min: '',
+        max: '',
+      },
     };
   },
   mounted() {
@@ -42,8 +31,7 @@ export default {
   },
   computed: {
     headerText() {
-      const str = `COVID-19 ${this.dataType} from ${this.startDate} to ${this.endDate}`;
-      return str;
+      return `COVID-19 ${this.dataType} from ${this.dates.start} to ${this.dates.end}`;
     },
   },
   methods: {
@@ -59,24 +47,30 @@ export default {
     // also set date boundaries for date input
     setDefaultDates() {
       const datasetArr = Object.keys(this.dataset);
-      this.startDate = datasetArr[datasetArr.length - 2];
-      this.endDate = datasetArr[datasetArr.length - 1];
+      this.dates.start = datasetArr[datasetArr.length - 2];
+      this.dates.end = datasetArr[datasetArr.length - 1];
       // eslint-disable-next-line prefer-destructuring
-      this.minDate = datasetArr[0];
-      this.maxDate = this.endDate;
+      this.dates.min = datasetArr[0];
+      this.dates.max = this.dates.end;
     },
     getStartData() {
-      return this.dataset[this.startDate];
+      return this.dataset[this.dates.start];
     },
     getEndData() {
-      return this.dataset[this.endDate];
+      return this.dataset[this.dates.end];
     },
     async setUpApp() {
       const data = await this.fetchData();
       this.dataset = data.dates;
       // catch this too
+      this.dataType = 'cases';
       this.setDefaultDates();
       this.isLoaded = true;
+    },
+    updateInputs(newInputs) {
+      this.dataType = newInputs.dataType;
+      this.dates.start = newInputs.startDate;
+      this.dates.end = newInputs.endDate;
     },
   },
 };
