@@ -15,7 +15,7 @@
       <label for="date">End date:</label>
       <input type="date" class="date-picker" v-model="endDate" :min="minDate" :max="maxDate">
     </form>
-    <Map id="map" v-if="isLoaded" :dataType="dataType"
+    <Map v-if="isLoaded" :dataType="dataType"
     :startData="getStartData()" :endData="getEndData()" />
   </div>
 </template>
@@ -61,7 +61,8 @@ export default {
       const datasetArr = Object.keys(this.dataset);
       this.startDate = datasetArr[datasetArr.length - 2];
       this.endDate = datasetArr[datasetArr.length - 1];
-      [this.minDate] = datasetArr;
+      // eslint-disable-next-line prefer-destructuring
+      this.minDate = datasetArr[0];
       this.maxDate = this.endDate;
     },
     getStartData() {
