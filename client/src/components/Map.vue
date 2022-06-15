@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div id="map">
     <!-- LONG inline svg ahead -->
     <!-- eslint-disable max-len -->
+    <p>Hover over a state for more details</p>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="192 9 1028 746"
       aria-label="Map of USA"
-      id="map"
     >
       <path
         id="ak"
@@ -265,7 +265,7 @@
       />
       <g id="tooltip" visibility="hidden">
         <rect width="80" height="26" fill="white" rx="4" ry="4"/>
-        <text dominant-baseline="hanging" x="4" y="6">{{ stateDetails }}</text>
+        <text dominant-baseline="hanging" x="6" y="6">{{ stateDetails }}</text>
       </g>
     </svg>
   </div>
@@ -371,7 +371,7 @@ export default {
       this.tooltip.setAttribute('visibility', 'visible');
       const length = this.tooltipText.getComputedTextLength();
       this.tooltipRects.forEach((rect) => {
-        rect.setAttribute('width', length + 8);
+        rect.setAttribute('width', length + 12);
       });
     },
     hideTooltip() {

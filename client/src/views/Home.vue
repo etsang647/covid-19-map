@@ -1,8 +1,12 @@
 <template>
   <div class="home" v-if="isLoaded">
-    <h1 class="header">{{ headerText }}</h1>
+    <h1 class="header">COVID-19 in the United States</h1>
     <Forms :dataType="dataType" :dates="dates" @input-changed="updateInputs" />
-    <Map :dataType="dataType" :startData="getStartData()" :endData="getEndData()" />
+    <Map :dataType="dataType" :dates="dates" :startData="getStartData()" :endData="getEndData()" />
+    <p>
+      created by Eric Tsang |
+      <a href="https://github.com/etsang647/covid-19-map">github</a>
+    </p>
   </div>
 </template>
 
@@ -31,14 +35,16 @@ export default {
   },
   computed: {
     headerText() {
-      return `COVID-19 ${this.dataType} from ${this.dates.start} to ${this.dates.end}`;
+      const startDate = this.formatDate(this.dates.start);
+      const endDate = this.formatDate(this.dates.end);
+      return `COVID-19 ${this.dataType} from ${startDate} to ${endDate}`;
     },
   },
   methods: {
     // fetch NYT dataset from server
     async fetchData() {
-      const path = 'http://localhost:5000/data'; // local Flask server
-      // const path = '/data'; // production server
+      // const path = 'http://localhost:5000/data'; // local Flask server
+      const path = '/data'; // production server
       const response = await fetch(path);
       return response.json();
       // catch here???
@@ -71,6 +77,12 @@ export default {
       this.dataType = newInputs.dataType;
       this.dates.start = newInputs.startDate;
       this.dates.end = newInputs.endDate;
+    },
+    // format date string from yyyy-mm-dd to mm/dd/yyyy
+    formatDate(date) {
+      const [year, month, day] = date.split('-');
+      const newDate = [month, day, year].join('/');
+      return newDate;
     },
   },
 };

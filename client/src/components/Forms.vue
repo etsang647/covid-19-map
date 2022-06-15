@@ -1,19 +1,25 @@
 <template>
-  <form class="date-and-type">
-    <label for="type">Type:</label>
-    <select name="" id="" v-model="inputs.dataType">
-      <option value="cases">cases</option>
-      <option value="deaths">deaths</option>
-    </select>
+  <div class="form">
+    <div class="form-input">
+      <label for="type">Type</label>
+      <select name="" id="" v-model="inputs.dataType">
+        <option value="cases">cases</option>
+        <option value="deaths">deaths</option>
+      </select>
+    </div>
 
-    <label for="date">Start date:</label>
-    <input type="date" class="date-picker" v-model="inputs.startDate"
-    :min="this.dates.min" :max="this.dates.max">
+    <div class="form-input">
+      <label for="date">Start date</label>
+      <input type="date" class="date-picker" v-model="inputs.startDate"
+      :min="this.dates.min" :max="this.dates.max">
+    </div>
 
-    <label for="date">End date:</label>
-    <input type="date" class="date-picker" v-model="inputs.endDate"
-    :min="this.dates.min" :max="this.dates.max">
-  </form>
+    <div class="form-input">
+      <label for="date">End date</label>
+      <input type="date" class="date-picker" v-model="inputs.endDate"
+      :min="this.dates.min" :max="this.dates.max">
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,6 +28,7 @@ export default {
   data() {
     return {
       inputs: {
+        // default values from parent
         dataType: this.dataType,
         startDate: this.dates.start,
         endDate: this.dates.end,
