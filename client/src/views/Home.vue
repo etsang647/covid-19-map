@@ -2,8 +2,10 @@
   <div class="home" v-if="isLoaded">
     <h1 class="header">COVID-19 in the United States</h1>
     <Forms :dataType="dataType" :dates="dates" @input-changed="updateInputs"
-      @date-out-of-bounds="outOfBoundsError" @date-out-of-order="outOfOrderError" />
-    <Map :dataType="dataType" :dates="dates" :info="info"
+      @data-type-invalid="typeInvalidError"
+      @date-out-of-bounds="outOfBoundsError"
+      @date-out-of-order="outOfOrderError" />
+    <Map :info="info" :dataType="dataType"
       :startData="getStartData()" :endData="getEndData()" />
     <p>
       created by Eric Tsang |
@@ -95,11 +97,15 @@ export default {
     outOfBoundsError() {
       const minDate = this.formatDate(this.dates.min);
       const maxDate = this.formatDate(this.dates.max);
-      this.info.msg = `Date must be in range [${minDate}, ${maxDate}]`;
+      this.info.msg = `Error: Date is outside range [${minDate}, ${maxDate}]`;
       this.info.error = true;
     },
     outOfOrderError() {
-      this.info.msg = 'Start date must come before end date';
+      this.info.msg = 'Error: Start date is later than end date';
+      this.info.error = true;
+    },
+    typeInvalidError() {
+      this.info.msg = 'Error: Type value is not "cases" or "deaths"';
       this.info.error = true;
     },
   },

@@ -42,18 +42,24 @@ export default {
   watch: {
     inputs: {
       handler() {
-        if (this.datesWithinRange() && this.datesInOrder()) {
-          this.$emit('input-changed', this.inputs);
+        if (!this.dataTypeValid()) {
+          this.$emit('data-type-invalid');
         } else if (!this.datesWithinRange()) {
           this.$emit('date-out-of-bounds');
-        } else {
+        } else if (!this.datesInOrder()) {
           this.$emit('date-out-of-order');
+        } else {
+          this.$emit('input-changed', this.inputs);
         }
       },
       deep: true,
     },
   },
   methods: {
+    dataTypeValid() {
+      const { dataType } = this.inputs;
+      return dataType === 'cases' || dataType === 'deaths';
+    },
     datesWithinRange() {
       const startDate = new Date(this.inputs.startDate);
       const endDate = new Date(this.inputs.endDate);
