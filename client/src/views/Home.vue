@@ -1,8 +1,8 @@
 <template>
   <div class="home" v-if="isLoaded">
     <h1 class="header">COVID-19 in the United States</h1>
-    <Forms :dataType="dataType" :dates="dates"
-      @input-changed="updateInputs" @invalid-date="showError" />
+    <Forms :dataType="dataType" :dates="dates" @input-changed="updateInputs"
+      @date-out-of-bounds="outOfBoundsError" @date-out-of-order="outOfOrderError" />
     <Map :dataType="dataType" :dates="dates" :info="info"
       :startData="getStartData()" :endData="getEndData()" />
     <p>
@@ -92,10 +92,14 @@ export default {
       const newDate = [month, day, year].join('/');
       return newDate;
     },
-    showError() {
+    outOfBoundsError() {
       const minDate = this.formatDate(this.dates.min);
       const maxDate = this.formatDate(this.dates.max);
       this.info.msg = `Date must be in range [${minDate}, ${maxDate}]`;
+      this.info.error = true;
+    },
+    outOfOrderError() {
+      this.info.msg = 'Start date must come before end date';
       this.info.error = true;
     },
   },

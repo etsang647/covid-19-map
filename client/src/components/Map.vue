@@ -265,7 +265,7 @@
       />
       <g id="tooltip" visibility="hidden">
         <rect width="80" height="26" fill="white" rx="4" ry="4"/>
-        <text dominant-baseline="hanging" x="6" y="6">{{ stateDetails }}</text>
+        <text dominant-baseline="hanging" x="4" y="6">{{ stateDetails }}</text>
       </g>
     </svg>
   </div>
@@ -291,19 +291,11 @@ export default {
     info: Object,
   },
   watch: {
-    dataType() {
-      this.updateStateClasses();
-    },
-    startData() {
-      this.updateStateClasses();
-    },
-    endData() {
-      this.updateStateClasses();
-    },
-    'info.error': {
+    $props: {
       handler() {
-        this.updateStateClasses(this.info.error);
+        this.updateStateClasses();
       },
+      deep: true,
     },
   },
   mounted() {
@@ -318,18 +310,19 @@ export default {
       const states = document.querySelectorAll('path');
       return states;
     },
-    updateStateClasses(error) {
+    updateStateClasses() {
       this.states.forEach((state) => {
         const stateName = state.getAttribute('name');
         const oldClass = state.classList[0];
-        const newClass = error ? 'class-0' : this.getStateClass(stateName);
+        const newClass = this.info.error ? 'class-error' : this.getStateClass(stateName);
         state.classList.replace(oldClass, newClass);
       });
     },
     setStateClasses() {
       this.states.forEach((state) => {
         const stateName = state.getAttribute('name');
-        state.classList.add(this.getStateClass(stateName));
+        const stateClass = this.info.error ? 'class-error' : this.getStateClass(stateName);
+        state.classList.add(stateClass);
       });
     },
     getStateClass(stateName) {
@@ -381,7 +374,7 @@ export default {
       this.tooltip.setAttribute('visibility', 'visible');
       const length = this.tooltipText.getComputedTextLength();
       this.tooltipRects.forEach((rect) => {
-        rect.setAttribute('width', length + 12);
+        rect.setAttribute('width', length + 8);
       });
     },
     hideTooltip() {

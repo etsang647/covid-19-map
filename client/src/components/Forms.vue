@@ -11,13 +11,13 @@
     <div class="form-input">
       <label for="date">Start date</label>
       <input type="date" class="date-picker" v-model="inputs.startDate"
-      :min="this.dates.min" :max="inputs.endDate">
+      :min="this.dates.min" :max="this.dates.max">
     </div>
 
     <div class="form-input">
       <label for="date">End date</label>
       <input type="date" class="date-picker" v-model="inputs.endDate"
-      :min="inputs.startDate" :max="this.dates.max">
+      :min="this.dates.min" :max="this.dates.max">
     </div>
   </div>
 </template>
@@ -42,17 +42,19 @@ export default {
   watch: {
     inputs: {
       handler() {
-        if (this.checkDates()) {
+        if (this.datesWithinRange() && this.datesInOrder()) {
           this.$emit('input-changed', this.inputs);
+        } else if (!this.datesWithinRange()) {
+          this.$emit('date-out-of-bounds');
         } else {
-          this.$emit('invalid-date');
+          this.$emit('date-out-of-order');
         }
       },
       deep: true,
     },
   },
   methods: {
-    checkDates() {
+    datesWithinRange() {
       const startDate = new Date(this.inputs.startDate);
       const endDate = new Date(this.inputs.endDate);
       const minDate = new Date(this.dates.min);
@@ -62,6 +64,12 @@ export default {
       const endDateValid = endDate >= minDate && endDate <= maxDate;
 
       return startDateValid && endDateValid;
+    },
+    datesInOrder() {
+      const startDate = new Date(this.inputs.startDate);
+      const endDate = new Date(this.inputs.endDate);
+
+      return startDate <= endDate;
     },
   },
 };
