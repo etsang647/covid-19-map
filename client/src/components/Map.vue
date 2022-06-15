@@ -2,7 +2,7 @@
   <div id="map">
     <!-- LONG inline svg ahead -->
     <!-- eslint-disable max-len -->
-    <p>Hover over a state for more details</p>
+    <p>{{ info.msg }}</p>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="192 9 1028 746"
@@ -288,6 +288,7 @@ export default {
     dataType: String,
     startData: Object,
     endData: Object,
+    info: Object,
   },
   watch: {
     dataType() {
@@ -298,6 +299,11 @@ export default {
     },
     endData() {
       this.updateStateClasses();
+    },
+    'info.error': {
+      handler() {
+        this.updateStateClasses(this.info.error);
+      },
     },
   },
   mounted() {
@@ -312,11 +318,11 @@ export default {
       const states = document.querySelectorAll('path');
       return states;
     },
-    updateStateClasses() {
+    updateStateClasses(error) {
       this.states.forEach((state) => {
         const stateName = state.getAttribute('name');
         const oldClass = state.classList[0];
-        const newClass = this.getStateClass(stateName);
+        const newClass = error ? 'class-0' : this.getStateClass(stateName);
         state.classList.replace(oldClass, newClass);
       });
     },
@@ -354,7 +360,11 @@ export default {
     setStateDetails(event) {
       const stateName = event.target.getAttribute('name');
       const stateDelta = this.getStateData(stateName);
-      this.stateDetails = `${stateName}: ${stateDelta.toLocaleString('en-US')} ${this.dataType}`;
+      if (this.info.error) {
+        this.stateDetails = `${stateName}: N/A`;
+      } else {
+        this.stateDetails = `${stateName}: ${stateDelta.toLocaleString('en-US')} ${this.dataType}`;
+      }
     },
     setStateEventListeners() {
       this.states.forEach((state) => {

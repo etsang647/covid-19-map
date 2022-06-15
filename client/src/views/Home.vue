@@ -1,8 +1,10 @@
 <template>
   <div class="home" v-if="isLoaded">
     <h1 class="header">COVID-19 in the United States</h1>
-    <Forms :dataType="dataType" :dates="dates" @input-changed="updateInputs" />
-    <Map :dataType="dataType" :dates="dates" :startData="getStartData()" :endData="getEndData()" />
+    <Forms :dataType="dataType" :dates="dates"
+      @input-changed="updateInputs" @invalid-date="showError" />
+    <Map :dataType="dataType" :dates="dates" :info="info"
+      :startData="getStartData()" :endData="getEndData()" />
     <p>
       created by Eric Tsang |
       <a href="https://github.com/etsang647/covid-19-map">github</a>
@@ -28,6 +30,10 @@ export default {
         min: '',
         max: '',
       },
+      info: {
+        msg: 'Hover over a state for more details',
+        error: false,
+      },
     };
   },
   mounted() {
@@ -43,8 +49,8 @@ export default {
   methods: {
     // fetch NYT dataset from server
     async fetchData() {
-      // const path = 'http://localhost:5000/data'; // local Flask server
-      const path = '/data'; // production server
+      const path = 'http://localhost:5000/data'; // local Flask server
+      // const path = '/data'; // production server
       const response = await fetch(path);
       return response.json();
       // catch here???
@@ -77,12 +83,20 @@ export default {
       this.dataType = newInputs.dataType;
       this.dates.start = newInputs.startDate;
       this.dates.end = newInputs.endDate;
+      this.info.msg = 'Hover over a state for more details';
+      this.info.error = false;
     },
     // format date string from yyyy-mm-dd to mm/dd/yyyy
     formatDate(date) {
       const [year, month, day] = date.split('-');
       const newDate = [month, day, year].join('/');
       return newDate;
+    },
+    showError() {
+      const minDate = this.formatDate(this.dates.min);
+      const maxDate = this.formatDate(this.dates.max);
+      this.info.msg = `Date must be in range [${minDate}, ${maxDate}]`;
+      this.info.error = true;
     },
   },
 };

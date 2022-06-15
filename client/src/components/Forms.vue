@@ -11,13 +11,13 @@
     <div class="form-input">
       <label for="date">Start date</label>
       <input type="date" class="date-picker" v-model="inputs.startDate"
-      :min="this.dates.min" :max="this.dates.max">
+      :min="this.dates.min" :max="inputs.endDate">
     </div>
 
     <div class="form-input">
       <label for="date">End date</label>
       <input type="date" class="date-picker" v-model="inputs.endDate"
-      :min="this.dates.min" :max="this.dates.max">
+      :min="inputs.startDate" :max="this.dates.max">
     </div>
   </div>
 </template>
@@ -42,9 +42,26 @@ export default {
   watch: {
     inputs: {
       handler() {
-        this.$emit('input-changed', this.inputs);
+        if (this.checkDates()) {
+          this.$emit('input-changed', this.inputs);
+        } else {
+          this.$emit('invalid-date');
+        }
       },
       deep: true,
+    },
+  },
+  methods: {
+    checkDates() {
+      const startDate = new Date(this.inputs.startDate);
+      const endDate = new Date(this.inputs.endDate);
+      const minDate = new Date(this.dates.min);
+      const maxDate = new Date(this.dates.max);
+
+      const startDateValid = startDate >= minDate && startDate <= maxDate;
+      const endDateValid = endDate >= minDate && endDate <= maxDate;
+
+      return startDateValid && endDateValid;
     },
   },
 };
