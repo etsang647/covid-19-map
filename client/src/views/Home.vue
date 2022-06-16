@@ -1,13 +1,16 @@
 <template>
-  <div class="home" v-if="isLoaded">
-    <h1 class="header">COVID-19 in the United States</h1>
-    <Forms :dataType="dataType" :dates="dates"
-      @input-changed="updateInputs" @error-changed="updateError" />
-    <Map :mapInfo="mapInfo" :dataType="dataType" :mapData="mapData" />
-    <p>
-      created by Eric Tsang |
-      <a href="https://github.com/etsang647/covid-19-map">github</a>
-    </p>
+  <div class="home">
+    <div v-if="isLoaded">
+      <h1 class>COVID-19 in the United States</h1>
+      <Forms :dataType="dataType" :dates="dates"
+        @input-changed="updateInputs" @error-changed="updateError" />
+      <Map :mapInfo="mapInfo" :dataType="dataType" :mapData="mapData" />
+      <p>
+        created by Eric Tsang |
+        <a href="https://github.com/etsang647/covid-19-map">github</a>
+      </p>
+    </div>
+    <h1 v-else>Loading...</h1>
   </div>
 </template>
 
@@ -47,9 +50,13 @@ export default {
     async fetchData() {
       const path = 'http://localhost:5000/data'; // local Flask server
       // const path = '/data'; // production server
-      const response = await fetch(path);
+      let response;
+      try {
+        response = await fetch(path);
+      } catch (error) {
+        console.error(error);
+      }
       return response.json();
-      // catch here???
     },
     // by default, set startDate and endDate to the 2 most recent dates in dataset
     // also set date boundaries for date input
@@ -67,9 +74,13 @@ export default {
       this.mapData.endData = this.dataset[endDate];
     },
     async setUpApp() {
-      const data = await this.fetchData();
-      this.dataset = data.dates;
-      // catch this too
+      try {
+        this.dataset = await this.fetchData();
+      } catch (error) {
+        console.error(error);
+        alert('Failed to fetch data');
+        return;
+      }
       this.dataType = 'cases';
       this.setDefaultDates();
       this.updateMapData();

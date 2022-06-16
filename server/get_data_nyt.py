@@ -43,7 +43,7 @@ def get_data_nyt():
       state_object = {'cases': int(cases), 'deaths': int(deaths)}
       dates_object[date][name] = state_object
 
-  return {'dates': dates_object}
+  return dates_object
 
 if __name__ == "__main__":
   get_data_nyt()

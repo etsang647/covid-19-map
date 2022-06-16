@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <h1>Hi there!</h1>
-    <p>This is a web app I built to track COVID-19 cases and deaths by state.</p>
+    <h1>Hello!</h1>
+    <p>This is an app I built to track COVID-19 cases and deaths by state.</p>
     <p>All data is sourced directly from
       <a href="https://github.com/nytimes/covid-19-data">The New York Times</a>.</p>
     <p>Visit the

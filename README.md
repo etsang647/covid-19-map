@@ -77,6 +77,6 @@ flask run
 
 to host the server at http://localhost:5000/.
 
-Note: When running the server locally, make sure the `path` listed in `Map.vue`
+Note: When running the server locally, make sure the `path` listed in `Home.vue`
 is that of the local server (http://localhost:5000/data) and not the
 production server.
