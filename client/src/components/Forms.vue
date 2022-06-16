@@ -33,6 +33,7 @@ export default {
         startDate: this.dates.start,
         endDate: this.dates.end,
       },
+      errorMsg: '',
     };
   },
   props: {
@@ -42,12 +43,8 @@ export default {
   watch: {
     inputs: {
       handler() {
-        if (!this.dataTypeValid()) {
-          this.$emit('data-type-invalid');
-        } else if (!this.datesWithinRange()) {
-          this.$emit('date-out-of-bounds');
-        } else if (!this.datesInOrder()) {
-          this.$emit('date-out-of-order');
+        if (this.checkForErrors()) {
+          this.$emit('error-changed', this.errorMsg);
         } else {
           this.$emit('input-changed', this.inputs);
         }
@@ -76,6 +73,26 @@ export default {
       const endDate = new Date(this.inputs.endDate);
 
       return startDate <= endDate;
+    },
+    checkForErrors() {
+      if (!this.dataTypeValid()) {
+        this.errorMsg = 'Error: Type value is not "cases" or "deaths"';
+      } else if (!this.datesWithinRange()) {
+        const minDate = this.formatDate(this.dates.min);
+        const maxDate = this.formatDate(this.dates.max);
+        this.errorMsg = `Error: Date is outside range [${minDate}, ${maxDate}]`;
+      } else if (!this.datesInOrder()) {
+        this.errorMsg = 'Error: Start date is later than end date';
+      } else {
+        this.errorMsg = '';
+      }
+      return this.errorMsg;
+    },
+    // format date string from yyyy-mm-dd to mm/dd/yyyy
+    formatDate(date) {
+      const [year, month, day] = date.split('-');
+      const newDate = [month, day, year].join('/');
+      return newDate;
     },
   },
 };

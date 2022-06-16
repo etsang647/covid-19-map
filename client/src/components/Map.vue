@@ -2,7 +2,7 @@
   <div id="map">
     <!-- LONG inline svg ahead -->
     <!-- eslint-disable max-len -->
-    <p>{{ info.msg }}</p>
+    <p>{{ mapInfo.msg }}</p>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="192 9 1028 746"
@@ -264,8 +264,8 @@
         d="M634.51,198.52L634.04,204.07L633.56,209.62L633.08,215.17L632.61,220.72L632.13,226.26L631.66,231.81L631.18,237.35L630.7,242.9L625.43,242.42L620.17,241.93L614.9,241.41L609.63,240.88L604.37,240.34L599.11,239.77L593.85,239.18L588.59,238.58L583.33,237.96L578.08,237.32L572.83,236.66L567.58,235.99L562.33,235.29L557.09,234.58L551.85,233.85L546.61,233.1L542.43,232.49L538.26,231.87L534.09,231.24L529.92,230.6L525.75,229.94L521.58,229.27L517.41,228.59L513.25,227.9L513.71,225.16L514.17,222.42L514.63,219.67L515.08,216.93L515.54,214.19L516,211.44L516.46,208.7L516.91,205.96L517.49,202.52L518.06,199.1L518.63,195.67L519.2,192.23L519.77,188.8L520.35,185.37L520.92,181.94L521.49,178.51L522.07,175.07L522.64,171.63L523.21,168.2L523.79,164.76L524.36,161.32L524.93,157.89L525.51,154.45L526.08,151.01L526.54,148.24L527.01,145.47L527.48,142.7L527.94,139.93L531.37,140.5L534.8,141.06L538.24,141.62L541.67,142.16L545.11,142.7L548.55,143.22L551.99,143.74L555.43,144.26L558.87,144.76L562.31,145.25L565.76,145.74L569.2,146.22L572.65,146.69L576.1,147.15L579.54,147.6L582.99,148.05L586.44,148.48L589.9,148.91L593.35,149.33L596.8,149.74L600.26,150.15L603.72,150.54L607.17,150.93L610.63,151.31L614.09,151.67L617.55,152.04L621.01,152.39L624.47,152.73L627.93,153.07L631.39,153.4L634.86,153.72L638.32,154.03L637.85,159.6L637.37,165.17L636.89,170.73L636.41,176.29L635.94,181.85L635.46,187.41L634.99,192.96z"
       />
       <g id="tooltip" visibility="hidden">
-        <rect width="80" height="26" fill="white" rx="4" ry="4"/>
-        <text dominant-baseline="hanging" x="4" y="6">{{ stateDetails }}</text>
+        <rect width="80" height="26" fill="white" rx="4" ry="4" />
+        <text dominant-baseline="hanging" x="5" y="6">{{ stateDetails }}</text>
       </g>
     </svg>
   </div>
@@ -276,19 +276,20 @@ export default {
   name: 'Map',
   data() {
     return {
-      states: {},
-      stateDetails: '',
       map: null,
-      tooltip: null,
-      tooltipText: null,
-      tooltipRects: null,
+      states: null,
+      stateDetails: '',
+      tooltip: {
+        group: null,
+        text: null,
+        background: null,
+      },
     };
   },
   props: {
     dataType: String,
-    startData: Object,
-    endData: Object,
-    info: Object,
+    mapData: Object,
+    mapInfo: Object,
   },
   watch: {
     $props: {
@@ -302,26 +303,18 @@ export default {
     this.setUpMap();
   },
   methods: {
-    getStates() {
-      // return NodeList of all states in map via DOM traversal
-      // since there are so many states that it wouldn't make sense
-      // to attach Vue attributes to each of them manually
-      // instead, keep reference to their paths from map svg
-      const states = document.querySelectorAll('path');
-      return states;
-    },
     updateStateClasses() {
       this.states.forEach((state) => {
         const stateName = state.getAttribute('name');
         const oldClass = state.classList[0];
-        const newClass = this.info.error ? 'class-error' : this.getStateClass(stateName);
+        const newClass = this.mapInfo.error ? 'class-error' : this.getStateClass(stateName);
         state.classList.replace(oldClass, newClass);
       });
     },
-    setStateClasses() {
+    addStateClasses() {
       this.states.forEach((state) => {
         const stateName = state.getAttribute('name');
-        const stateClass = this.info.error ? 'class-error' : this.getStateClass(stateName);
+        const stateClass = this.mapInfo.error ? 'class-error' : this.getStateClass(stateName);
         state.classList.add(stateClass);
       });
     },
@@ -329,39 +322,42 @@ export default {
       return this.getClass(this.getStateData(stateName));
     },
     getStateData(stateName) {
-      // eslint-disable-next-line max-len
-      const startData = (stateName in this.startData) ? this.startData[stateName][this.dataType] : 0;
-      const endData = (stateName in this.endData) ? this.endData[stateName][this.dataType] : 0;
-      return endData - startData;
+      const { dataType } = this;
+      const { startData, endData } = this.mapData;
+      const startNumber = (stateName in startData) ? startData[stateName][dataType] : 0;
+      const endNumber = (stateName in endData) ? endData[stateName][dataType] : 0;
+      return endNumber - startNumber;
     },
     getClass(number) {
       let classStr;
-      const absVal = Math.abs(number);
+      const absNumber = Math.abs(number);
 
-      if (absVal === 0) classStr = 'class-0';
-      else if (absVal >= 1 && absVal <= 9) classStr = 'class-1';
-      else if (absVal >= 10 && absVal <= 99) classStr = 'class-2';
-      else if (absVal >= 100 && absVal <= 999) classStr = 'class-3';
-      else if (absVal >= 1000 && absVal <= 9999) classStr = 'class-4';
-      else if (absVal >= 10000 && absVal <= 99999) classStr = 'class-5';
-      else if (absVal >= 100000 && absVal <= 999999) classStr = 'class-6';
-      else if (absVal >= 1000000 && absVal <= 9999999) classStr = 'class-7';
+      if (absNumber === 0) classStr = 'class-0';
+      else if (absNumber >= 1 && absNumber <= 9) classStr = 'class-1';
+      else if (absNumber >= 10 && absNumber <= 99) classStr = 'class-2';
+      else if (absNumber >= 100 && absNumber <= 999) classStr = 'class-3';
+      else if (absNumber >= 1000 && absNumber <= 9999) classStr = 'class-4';
+      else if (absNumber >= 10000 && absNumber <= 99999) classStr = 'class-5';
+      else if (absNumber >= 100000 && absNumber <= 999999) classStr = 'class-6';
+      else if (absNumber >= 1000000 && absNumber <= 9999999) classStr = 'class-7';
       else classStr = 'class-8';
 
       return classStr;
     },
-    setStateDetails(event) {
+    updateStateDetails(event) {
       const stateName = event.target.getAttribute('name');
-      const stateDelta = this.getStateData(stateName);
-      if (this.info.error) {
+      const stateData = this.getStateData(stateName);
+      if (this.mapInfo.error) {
         this.stateDetails = `${stateName}: N/A`;
       } else {
-        this.stateDetails = `${stateName}: ${stateDelta.toLocaleString('en-US')} ${this.dataType}`;
+        // toLocaleString('en-US') converts a number to its comma separated string
+        // e.g. 1000 -> 1,000
+        this.stateDetails = `${stateName}: ${stateData.toLocaleString('en-US')} ${this.dataType}`;
       }
     },
-    setStateEventListeners() {
+    addStateEventListeners() {
       this.states.forEach((state) => {
-        state.addEventListener('mouseover', this.setStateDetails);
+        state.addEventListener('mouseover', this.updateStateDetails);
         state.addEventListener('mousemove', this.showTooltip);
         state.addEventListener('mouseout', this.hideTooltip);
       });
@@ -370,25 +366,26 @@ export default {
       const CTM = this.map.getScreenCTM();
       const x = (event.clientX - CTM.e + 6) / CTM.a;
       const y = (event.clientY - CTM.f + 20) / CTM.d;
-      this.tooltip.setAttribute('transform', `translate(${x} ${y})`);
-      this.tooltip.setAttribute('visibility', 'visible');
-      const length = this.tooltipText.getComputedTextLength();
-      this.tooltipRects.forEach((rect) => {
-        rect.setAttribute('width', length + 8);
-      });
+      this.tooltip.group.setAttribute('transform', `translate(${x} ${y})`);
+      this.tooltip.group.setAttribute('visibility', 'visible');
+
+      const length = this.tooltip.text.getComputedTextLength();
+      this.tooltip.background.setAttribute('width', length + 10);
     },
     hideTooltip() {
-      this.tooltip.setAttribute('visibility', 'hidden');
+      this.tooltip.group.setAttribute('visibility', 'hidden');
+    },
+    grabSvgObjects() {
+      this.map = document.querySelector('svg');
+      this.states = this.map.querySelectorAll('path');
+      this.tooltip.group = this.map.querySelector('#tooltip');
+      this.tooltip.text = this.tooltip.group.querySelector('text');
+      this.tooltip.background = this.tooltip.group.querySelector('rect');
     },
     setUpMap() {
-      this.states = this.getStates();
-      this.setStateClasses();
-      this.tooltip = document.getElementById('tooltip');
-      // eslint-disable-next-line prefer-destructuring
-      this.tooltipText = this.tooltip.getElementsByTagName('text')[0];
-      this.tooltipRects = this.tooltip.getElementsByTagName('rect');
-      this.map = document.querySelector('svg');
-      this.setStateEventListeners();
+      this.grabSvgObjects();
+      this.addStateClasses();
+      this.addStateEventListeners();
     },
   },
 };

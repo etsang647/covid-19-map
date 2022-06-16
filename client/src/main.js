@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import '@/scss/map.scss';
+import './stylesheets/styles.scss';
 
 Vue.config.productionTip = false;
 
