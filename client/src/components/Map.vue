@@ -1,8 +1,7 @@
 <template>
+  <!-- eslint-disable max-len -->
   <div id="map">
-    <!-- LONG inline svg ahead -->
-    <!-- eslint-disable max-len -->
-    <p>{{ mapInfo.msg }}</p>
+    <p id="map-info">{{ mapError.msg }}</p>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="192 9 1028 746"
@@ -289,7 +288,7 @@ export default {
   props: {
     dataType: String,
     mapData: Object,
-    mapInfo: Object,
+    mapError: Object,
   },
   watch: {
     $props: {
@@ -303,65 +302,86 @@ export default {
     this.setUpMap();
   },
   methods: {
-    updateStateClasses() {
-      this.states.forEach((state) => {
-        const stateName = state.getAttribute('name');
-        const oldClass = state.classList[0];
-        const newClass = this.mapInfo.error ? 'class-error' : this.getStateClass(stateName);
-        state.classList.replace(oldClass, newClass);
-      });
+    // use vanilla JS to traverse DOM and grab svg map object and its children
+    // since manually attaching Vue attributes and computed properties to every state
+    // would be extremely tedious (i say this from experience)
+    grabSvgObjects() {
+      this.map = document.querySelector('svg');
+      this.states = this.map.querySelectorAll('path');
+      this.tooltip.group = this.map.querySelector('#tooltip');
+      this.tooltip.text = this.tooltip.group.querySelector('text');
+      this.tooltip.background = this.tooltip.group.querySelector('rect');
     },
-    addStateClasses() {
-      this.states.forEach((state) => {
-        const stateName = state.getAttribute('name');
-        const stateClass = this.mapInfo.error ? 'class-error' : this.getStateClass(stateName);
-        state.classList.add(stateClass);
-      });
-    },
-    getStateClass(stateName) {
-      return this.getClass(this.getStateData(stateName));
-    },
+    // returns total number of cases/deaths for a given state within selected time period
     getStateData(stateName) {
       const { dataType } = this;
       const { startData, endData } = this.mapData;
+      // if stateName is not found in either data object, set its value to 0
       const startNumber = (stateName in startData) ? startData[stateName][dataType] : 0;
       const endNumber = (stateName in endData) ? endData[stateName][dataType] : 0;
       return endNumber - startNumber;
     },
+    // returns class string based on size of number
+    // positive number => pinkish red
+    // negative number => teal (opposite of pinkish red)
     getClass(number) {
       let classStr;
-      const absNumber = Math.abs(number);
-
-      if (absNumber === 0) classStr = 'class-0';
-      else if (absNumber >= 1 && absNumber <= 9) classStr = 'class-1';
-      else if (absNumber >= 10 && absNumber <= 99) classStr = 'class-2';
-      else if (absNumber >= 100 && absNumber <= 999) classStr = 'class-3';
-      else if (absNumber >= 1000 && absNumber <= 9999) classStr = 'class-4';
-      else if (absNumber >= 10000 && absNumber <= 99999) classStr = 'class-5';
-      else if (absNumber >= 100000 && absNumber <= 999999) classStr = 'class-6';
-      else if (absNumber >= 1000000 && absNumber <= 9999999) classStr = 'class-7';
-      else classStr = 'class-8';
-
+      if (number >= 0) {
+        if (number === 0) classStr = 'class-0';
+        else if (number >= 1 && number <= 9) classStr = 'class-1';
+        else if (number >= 10 && number <= 99) classStr = 'class-2';
+        else if (number >= 100 && number <= 999) classStr = 'class-3';
+        else if (number >= 1000 && number <= 9999) classStr = 'class-4';
+        else if (number >= 10000 && number <= 99999) classStr = 'class-5';
+        else if (number >= 100000 && number <= 999999) classStr = 'class-6';
+        else if (number >= 1000000 && number <= 9999999) classStr = 'class-7';
+        else if (number >= 10000000) classStr = 'class-8';
+      }
+      if (number < 0) {
+        if (number <= -1 && number >= -9) classStr = 'class-neg-1';
+        else if (number <= -10 && number >= -99) classStr = 'class-neg-2';
+        else if (number <= -100 && number >= -999) classStr = 'class-neg-3';
+        else if (number <= -1000 && number >= -9999) classStr = 'class-neg-4';
+        else if (number <= -10000 && number >= -99999) classStr = 'class-neg-5';
+        else if (number <= -100000 && number >= -999999) classStr = 'class-neg-6';
+        else if (number <= -1000000 && number >= -9999999) classStr = 'class-neg-7';
+        else if (number <= -10000000) classStr = 'class-neg-8';
+      }
       return classStr;
     },
+    getStateClass(stateName) {
+      return this.getClass(this.getStateData(stateName));
+    },
+    addStateClasses() {
+      this.states.forEach((state) => {
+        const stateName = state.getAttribute('name');
+        const stateClass = this.mapError.error ? 'class-error' : this.getStateClass(stateName);
+        state.classList.add(stateClass);
+      });
+    },
+    updateStateClasses() {
+      this.states.forEach((state) => {
+        const stateName = state.getAttribute('name');
+        const oldClass = state.classList[0];
+        const newClass = this.mapError.error ? 'class-error' : this.getStateClass(stateName);
+        state.classList.replace(oldClass, newClass);
+      });
+    },
+    // updates text shown on tooltip
     updateStateDetails(event) {
       const stateName = event.target.getAttribute('name');
       const stateData = this.getStateData(stateName);
-      if (this.mapInfo.error) {
+      if (this.mapError.error) {
         this.stateDetails = `${stateName}: N/A`;
       } else {
-        // toLocaleString('en-US') converts a number to its comma separated string
-        // e.g. 1000 -> 1,000
+        // note: toLocaleString('en-US') converts a number into a comma separated string
+        // e.g. 1000 -> "1,000"
         this.stateDetails = `${stateName}: ${stateData.toLocaleString('en-US')} ${this.dataType}`;
       }
     },
-    addStateEventListeners() {
-      this.states.forEach((state) => {
-        state.addEventListener('mouseover', this.updateStateDetails);
-        state.addEventListener('mousemove', this.showTooltip);
-        state.addEventListener('mouseout', this.hideTooltip);
-      });
-    },
+    // set tooltip position next to cursor and toggle visibility
+    // thanks to Peter Collingridge for his svg tooltip tutorial!
+    // https://www.petercollingridge.co.uk/tutorials/svg/interactive/tooltip/
     showTooltip(event) {
       const CTM = this.map.getScreenCTM();
       const x = (event.clientX - CTM.e + 6) / CTM.a;
@@ -375,12 +395,12 @@ export default {
     hideTooltip() {
       this.tooltip.group.setAttribute('visibility', 'hidden');
     },
-    grabSvgObjects() {
-      this.map = document.querySelector('svg');
-      this.states = this.map.querySelectorAll('path');
-      this.tooltip.group = this.map.querySelector('#tooltip');
-      this.tooltip.text = this.tooltip.group.querySelector('text');
-      this.tooltip.background = this.tooltip.group.querySelector('rect');
+    addStateEventListeners() {
+      this.states.forEach((state) => {
+        state.addEventListener('mouseover', this.updateStateDetails);
+        state.addEventListener('mousemove', this.showTooltip);
+        state.addEventListener('mouseout', this.hideTooltip);
+      });
     },
     setUpMap() {
       this.grabSvgObjects();
