@@ -82,8 +82,8 @@ export default {
     },
     // fetch NYT dataset from server
     async fetchData() {
-      const path = 'http://localhost:5000/data'; // local Flask server
-      // const path = '/data'; // production server
+      // const path = 'http://localhost:5000/data'; // local Flask server
+      const path = '/data'; // production server
       let response;
       try {
         response = await fetch(path);
