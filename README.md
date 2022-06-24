@@ -8,7 +8,7 @@ An interactive map of COVID-19 cases in the United States. Visit it [here](https
 
 States can adjust their case/death counts for various reasons, including changes in methodology. For example, Massachusetts reported [-3700 deaths on March 14, 2022](https://www.boston.com/news/coronavirus/2022/03/10/covid-19-deaths-massachusetts-adjusted-count/) due to changes in how they classify deaths attributed to COVID-19.
 
-If you're curious about specific numbers, check out the [full New York Times state-level dataset](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv), which is where I get all my data from.
+If you're curious about specific numbers, check out the full [New York Times state-level dataset](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv), which is where I get all my data from.
 
 ## To build the project locally
 
