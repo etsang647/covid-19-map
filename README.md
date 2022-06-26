@@ -14,7 +14,7 @@ Some states will report negative cases/deaths for a day if prior data is found t
 
 This typically happens when a number of probable cases/deaths previously reported by a state gets disproven at a later date. This state will then report negative cases/deaths for a day to adjust for that change and keep their overall case numbers accurate.
 
-Another reason why this may happen (specifically for deaths) is that sometimes a state will change how they classify deaths attributed to COVID-19 by making their criteria stricter. After such a change the state will likely report a large number of negative deaths for the day to keep their overall death numbers in line with the new criteria.
+Another reason why this may happen (specifically for deaths) is that sometimes a state will change how they classify deaths attributed to COVID-19 by making their criteria stricter. After such a change the state will likely report [a large number of negative deaths for the day](https://www.boston.com/news/coronavirus/2022/03/10/covid-19-deaths-massachusetts-adjusted-count/) to keep their overall death numbers in line with the new criteria.
 
 ## To build the project locally
 
