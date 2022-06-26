@@ -4,11 +4,17 @@ An interactive map of COVID-19 cases in the United States. Visit it [here](https
 
 ## FAQ
 
+### Many states report having 0 cases for the day. Is this true?
+
+Most likely not. [More than half of states do not report new data every day](https://www.washingtonpost.com/graphics/2020/national/coronavirus-us-cases-deaths/?state=US), so cases often get bunched up and reported only on certain days of the week. This is especially true on weekends, when most states will wait until Monday to report all their data.
+
 ### I'm seeing negative cases/deaths for a state. Why is that?
 
-States can adjust their case/death counts for various reasons, including changes in methodology. For example, Massachusetts reported [-3700 deaths on March 14, 2022](https://www.boston.com/news/coronavirus/2022/03/10/covid-19-deaths-massachusetts-adjusted-count/) due to changes in how they classify deaths attributed to COVID-19.
+Some states will report negative cases/deaths for a day if prior data is found to be inaccurate and needs adjustment, and the adjustment exceeds the number of new cases/deaths for that day.
 
-If you're curious about specific numbers, check out the [full New York Times state-level dataset](https://github.com/nytimes/covid-19-data/blob/master/us-states.csv), which is where I get all my data from.
+This typically happens when some number of probable cases previously reported by a state gets disproven at a later date, and that state decides to report negative numbers for a day to adjust for that change.
+
+Another reason why this may happen is because a state will change how they classify deaths attributed to COVID-19, typically by making requirements stricter and reporting negative deaths for a day to reflect that change.
 
 ## To build the project locally
 
